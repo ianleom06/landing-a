@@ -11,3 +11,74 @@
     .stacked::after { translate: 16px 34px; background: linear-gradient(135deg, #1ED6BE, #30A8F7); opacity: .75; }
     /* Accessible focus ring */
     :focus-visible { outline: 2px solid #30A8F7; outline-offset: 2px; }
+/* ==== Mobile polish pack (overrides) ==== */
+
+/* Fondo un poco más claro */
+:root{
+  --bg-900:#111418; /* antes era más negro */
+  --bg-800:#161a1f;
+}
+body{ background:#0f1318; }
+
+/* H1 del hero más chico en móvil */
+@media (max-width:480px){
+  .hero h1{
+    font-size: clamp(1.75rem, 6.4vw + .5rem, 2.3rem);
+    line-height: 1.1;
+  }
+  /* Bullets/textos un poco más chicos */
+  .hero .bullets li{ font-size: 0.98rem; }
+}
+
+/* Inputs claros estilo captura 1 */
+.hero form input,
+.hero form textarea,
+form input, form textarea, form select{
+  background:#f7f8fa;
+  color:#0e1217;
+  border:1.5px solid #dfe3ea;
+  border-radius:12px;
+  padding:14px 16px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+}
+.hero form input::placeholder,
+.hero form textarea::placeholder{ color:#7d8aa0; }
+
+/* Foco accesible */
+form input:focus, form textarea:focus, form select:focus{
+  outline:2px solid #24D082;
+  outline-offset:2px;
+  border-color:#24D082;
+}
+
+/* Botón principal (sólido) */
+.button-primary, .btn-primary{
+  background:#24D082;
+  color:#061017;
+  border:0;
+  border-radius:12px;
+  padding:14px 20px;
+  font-weight:700;
+  box-shadow:0 12px 30px rgba(36,208,130,.35);
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.button-primary:hover, .btn-primary:hover{
+  filter:brightness(1.05);
+  transform:translateY(-1px);
+}
+.button-primary:active, .btn-primary:active{
+  transform:none; box-shadow:0 8px 20px rgba(36,208,130,.35);
+}
+
+/* Botón secundario (outline) */
+.button-outline, .btn-outline{
+  background:transparent;
+  color:#d9e1ee;
+  border:1.5px solid rgba(255,255,255,.22);
+  border-radius:12px;
+  padding:14px 20px;
+}
+
+/* “Card apilada” del form: offset como la 1ª captura */
+.card-stack::before{ transform: translate(10px,12px); }
+.card-stack::after { transform: translate(22px,24px); }
