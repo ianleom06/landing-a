@@ -137,3 +137,118 @@ body{
 @media (max-width:480px){
   #hero .mx-auto, .hero .mx-auto{ padding-top:1.2rem; padding-bottom:1.5rem; }
 }
+/* ===== HERO OVERRIDE UNIVERSAL (mobile-first) ===== */
+/* Apunta a #hero, .hero o cualquier section cuyo id contenga "hero" (case-insensitive) */
+:root{
+  --bg-900:#111418;
+  --bg-800:#161a1f;
+  --accent-green:#24D082;
+  --accent-teal:#1ED6BE;
+  --accent-blue:#30A8F7;
+}
+
+/* Fondo general un pelín más claro */
+html,body{ background:#0f1318 !important; }
+
+/* --- HERO base + fondo con rayas + curva --- */
+:is(#hero, .hero, section[id*="hero" i]){
+  position: relative !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+:is(#hero, .hero, section[id*="hero" i"])::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(150deg,
+      rgba(255,255,255,.04), rgba(255,255,255,.04) 2px,
+      transparent 2px, transparent 22px);
+  opacity:.18; pointer-events:none;
+}
+:is(#hero, .hero, section[id*="hero" i"])::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px; height:60px;
+  background: var(--bg-900);
+  clip-path: ellipse(75% 60px at 50% 0%);
+}
+
+/* --- Tipografía, centrado y tamaños en mobile --- */
+@media (max-width:480px){
+  :is(#hero, .hero, section[id*="hero" i"]) :is(h1,h2,h3,p,ul){ text-align:center !important; }
+  :is(#hero, .hero, section[id*="hero" i"]) h1{
+    font-size: clamp(1.75rem, 6.2vw + .5rem, 2.2rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.2px !important;
+  }
+  :is(#hero, .hero, section[id*="hero" i"]) ul li{
+    font-size: .96rem !important;
+    line-height: 1.5 !important;
+  }
+}
+/* Subrayado del H1 con un poco más de separación */
+:is(#hero, .hero, section[id*="hero" i"]) .u-underline{
+  display:inline;
+  box-shadow: inset 0 -.28em 0 rgba(36,208,130,.18) !important;
+  padding-bottom:.04em !important;
+}
+
+/* --- Botones: 1º = sólido verde, 2º = outline --- */
+/* Base para cualquier <a>/<button> dentro del hero */
+:is(#hero, .hero, section[id*="hero" i"]) :is(a,button){
+  border-radius:12px !important;
+  padding:14px 20px !important;
+  font-weight:700 !important;
+}
+/* 1º botón (suele ser “Contáctanos”) */
+:is(#hero, .hero, section[id*="hero" i"]) :is(a,button):first-of-type{
+  background:var(--accent-green) !important; color:#061017 !important; border:0 !important;
+  box-shadow:0 12px 30px rgba(36,208,130,.35) !important;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+:is(#hero, .hero, section[id*="hero" i"]) :is(a,button):first-of-type:hover{
+  filter:brightness(1.05) !important; transform:translateY(-1px) !important;
+}
+/* 2º botón (suele ser “Ver Precios”) */
+:is(#hero, .hero, section[id*="hero" i"]) :is(a,button):nth-of-type(2){
+  background:transparent !important; color:#d9e1ee !important;
+  border:1.5px solid rgba(255,255,255,.22) !important;
+  font-weight:600 !important;
+}
+
+/* --- Inputs claros y compactos dentro del hero --- */
+:is(#hero, .hero, section[id*="hero" i"]) form :is(input, textarea, select){
+  background:#f7f8fa !important; color:#0e1217 !important;
+  border:1.5px solid #dfe3ea !important; border-radius:12px !important;
+  padding:14px 16px !important; box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
+}
+:is(#hero, .hero, section[id*="hero" i"]) form :is(input, textarea)::placeholder{ color:#7d8aa0 !important; }
+:is(#hero, .hero, section[id*="hero" i"]) form :is(input, textarea, select):focus{
+  outline:2px solid var(--accent-green) !important; outline-offset:2px !important; border-color:var(--accent-green) !important;
+}
+
+/* --- “Stacked card” detrás del formulario (sin tocar HTML) --- */
+/* Lo aplico directamente al <form> si no hay wrapper .stacked/.card-stack */
+:is(#hero, .hero, section[id*="hero" i"]) form{
+  position:relative !important; isolation:isolate !important;
+  border-radius:18px !important; z-index:1 !important;
+  max-width:520px; margin-inline:auto; padding:18px 20px !important;
+  background: var(--bg-800) !important; /* si tu form ya era blanco, comenta esta línea */
+}
+:is(#hero, .hero, section[id*="hero" i"]) form::before,
+:is(#hero, .hero, section[id*="hero" i"]) form::after{
+  content:""; position:absolute; inset:16px -16px auto auto; border-radius:18px; z-index:-1;
+}
+:is(#hero, .hero, section[id*="hero" i"]) form::before{
+  background:linear-gradient(180deg, var(--accent-teal), transparent); transform:translate(10px,12px);
+}
+:is(#hero, .hero, section[id*="hero" i"]) form::after{
+  background:linear-gradient(180deg, var(--accent-blue), transparent); transform:translate(22px,24px);
+}
+/* Más compacto en móvil */
+@media (max-width:480px){
+  :is(#hero, .hero, section[id*="hero" i"]) form{ max-width:340px; padding:16px 16px !important; }
+}
+/* Reduce un poco la altura del hero para que el form suba */
+@media (max-width:480px){
+  :is(#hero, .hero, section[id*="hero" i"]) .mx-auto{ padding-top:1.2rem !important; padding-bottom:1.5rem !important; }
+}
