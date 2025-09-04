@@ -82,3 +82,67 @@ form input:focus, form textarea:focus, form select:focus{
 /* “Card apilada” del form: offset como la 1ª captura */
 .card-stack::before{ transform: translate(10px,12px); }
 .card-stack::after { transform: translate(22px,24px); }
+/* ===== Override v2 (forzar coincidencias y tamaño móvil) ===== */
+
+/* 1) Fondo un poco más gris (menos negro) */
+:root{
+  --bg-900:#111418;
+  --bg-800:#161a1f;
+}
+html, body{ background:#0f1318 !important; }
+
+/* 2) Título del HERO más chico en móvil */
+@media (max-width: 480px){
+  /* doble selector para más especificidad + !important */
+  #hero h1, main #hero h1, section#hero h1, #hero #hero h1{
+    font-size: clamp(1.9rem, 6vw, 2.4rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.3px;
+  }
+  /* Bullets/texto del hero un poco más chico */
+  #hero ul li, main #hero ul li{
+    font-size: .96rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* 3) Inputs claros como en la 1ª captura */
+#hero form input,
+#hero form textarea,
+form input, form textarea, form select{
+  background:#f7f8fa !important;
+  color:#0e1217 !important;
+  border:1.5px solid #dfe3ea !important;
+  border-radius:12px !important;
+  padding:14px 16px !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
+}
+form input::placeholder, form textarea::placeholder{ color:#7d8aa0 !important; }
+form input:focus, form textarea:focus, form select:focus{
+  outline:2px solid #24D082 !important;
+  outline-offset:2px !important;
+  border-color:#24D082 !important;
+}
+
+/* 4) Botón principal (sólido) y secundario (outline) dentro del HERO */
+#hero .btn, #hero a.btn, #hero .button, #hero a.button, #hero button{
+  border-radius:12px !important;
+  padding:14px 20px !important;
+  font-weight:700 !important;
+}
+#hero .btn-primary, #hero .button-primary, #hero .btn--primary{
+  background:#24D082 !important; color:#061017 !important; border:0 !important;
+  box-shadow:0 12px 30px rgba(36,208,130,.35) !important;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+#hero .btn-primary:hover, #hero .button-primary:hover, #hero .btn--primary:hover{
+  filter:brightness(1.05) !important; transform:translateY(-1px) !important;
+}
+#hero .btn-outline, #hero .button-outline, #hero .btn--secondary{
+  background:transparent !important; color:#d9e1ee !important;
+  border:1.5px solid rgba(255,255,255,.22) !important;
+}
+
+/* 5) “Card apilada” del formulario (desplazamientos) */
+#hero .card-stack::before{ transform: translate(10px,12px) !important; }
+#hero .card-stack::after { transform: translate(22px,24px) !important; }
