@@ -317,3 +317,84 @@ html, body{ background:#0f1318 !important; }
 #hero ul li span:first-child{
   background:rgba(36,208,130,.12) !important; color:var(--accent-green) !important;
 }
+/* === FIX HERO LAYERING + STYLES (mobile-first) ================= */
+
+/* Fondo un poco más claro y rayas más visibles */
+:root{ --bg-900:#111418; --bg-800:#161a1f; }
+#hero{ position:relative; background:#101519; }
+#hero::before{ z-index:0; opacity:.22; }           /* rayas más notorias */
+#hero::after{  z-index:0; height:72px;
+  background:var(--bg-900);
+  clip-path: ellipse(120% 72px at 50% 0%);
+}
+/* Todo el contenido del hero por encima de ::before/::after */
+#hero > *{ position:relative; z-index:1; }
+
+/* Títulos y botones centrados en mobile + tamaños */
+@media (max-width:480px){
+  #hero .grid > :first-child{ text-align:center; }
+  #hero h1{
+    font-size: clamp(1.55rem, 5.8vw + .4rem, 2.05rem) !important;
+    line-height:1.1 !important;
+    letter-spacing:-.2px;
+    margin-top:.35rem;
+  }
+  #hero .mt-8{ justify-content:center; }
+  /* más respiro arriba/abajo para que “baje” el copy */
+  #hero .mx-auto{ padding-top:2rem !important; padding-bottom:2.25rem !important; }
+}
+/* Subrayado con un poco más de separación */
+#hero .u-underline{
+  box-shadow: inset 0 -.28em 0 rgba(36,208,130,.18) !important;
+  padding-bottom:.04em !important;
+}
+
+/* ---------- BOTONES como la cap 1 ---------- */
+#hero a[href="#contacto"]{
+  background:#24D082!important; color:#061017!important; border:0!important;
+  border-radius:12px!important; padding:14px 20px!important; font-weight:700!important;
+  box-shadow:0 12px 30px rgba(36,208,130,.35)!important;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease!important;
+}
+#hero a[href="#contacto"]:hover{ filter:brightness(1.05)!important; transform:translateY(-1px)!important; }
+#hero a[href="#precios"]{
+  background:transparent!important; color:#d9e1ee!important;
+  border:1.5px solid rgba(255,255,255,.22)!important;
+  border-radius:12px!important; padding:14px 20px!important; font-weight:600!important;
+}
+
+/* ---------- FORMULARIO (blanco) + capas “stacked” detrás ---------- */
+/* Asegura que el form sea blanco (por si alguna regla previa lo oscureció) */
+#hero .stacked form{
+  background:#ffffff !important; color:#0e1217 !important;
+  border-radius:18px !important;
+}
+/* Si tenías un “truco” de form::before/after, lo desactivamos aquí */
+#hero form::before, #hero form::after{ content:none !important; }
+
+/* Capas detrás del form en el contenedor .stacked */
+#hero .stacked{ position:relative; isolation:isolate; }
+#hero .stacked::before, #hero .stacked::after{
+  content:""; position:absolute; z-index:0; border-radius:20px;
+  inset:16px -16px auto auto;           /* esquina superior-derecha */
+}
+#hero .stacked::before{ background:linear-gradient(180deg,#1ED6BE,transparent);
+  transform:translate(12px,10px); opacity:.95; }
+#hero .stacked::after{  background:linear-gradient(180deg,#30A8F7,transparent);
+  transform:translate(24px,20px); opacity:.95; }
+
+/* Inputs claros y compactos */
+#hero form input, #hero form textarea, #hero form select{
+  background:#f7f8fa !important; color:#0e1217 !important;
+  border:1.5px solid #dfe3ea !important; border-radius:12px !important;
+  padding:14px 16px !important; box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
+}
+#hero form input::placeholder, #hero form textarea::placeholder{ color:#7d8aa0 !important; }
+#hero form :is(input,textarea,select):focus{
+  outline:2px solid #24D082 !important; outline-offset:2px !important; border-color:#24D082 !important;
+}
+
+/* Form más compacto en mobile */
+@media (max-width:480px){
+  #hero .stacked form{ max-width:340px; padding:16px 16px !important; margin-inline:auto; }
+}
