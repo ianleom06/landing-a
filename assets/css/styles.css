@@ -1,0 +1,13 @@
+/* ==== Inline style block #1 from index_single.html ==== */
+:root { color-scheme: dark; }
+    body { background-image: radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
+                         radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
+    }
+    /* Underline accent utility */
+    .u-underline { box-shadow: inset 0 -0.2em 0 rgba(36,208,130,.8); }
+    /* Multi-layer card (stacked shadow) */
+    .stacked::before, .stacked::after { content: ""; position: absolute; inset: 0; border-radius: 16px; z-index: -2; }
+    .stacked::before { translate: 8px 18px; background: linear-gradient(135deg, #24D082, #30A8F7); opacity: .95; }
+    .stacked::after { translate: 16px 34px; background: linear-gradient(135deg, #1ED6BE, #30A8F7); opacity: .75; }
+    /* Accessible focus ring */
+    :focus-visible { outline: 2px solid #30A8F7; outline-offset: 2px; }

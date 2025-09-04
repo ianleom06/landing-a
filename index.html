@@ -1,455 +1,369 @@
-<!doctype html>
-<html lang="es" class="scroll-smooth">
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Landing – Boilerplate (clon legal)</title>
-  <meta name="description" content="Landing dark moderna con secciones: hero + formulario, features, proceso 1–2–3, diferencial comparativo, precios, nosotros, FAQ, contacto y footer." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>/* Tailwind tokens (ajústalos a tu branding) */
-    tailwind.config = {
-      theme: {
-        fontFamily: { sans: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'] },
-        extend: {
-          colors: {
-            base: {
-              900: '#0b0e12',
-              800: '#101418',
-              700: '#141922',
-              600: '#1b2230'
-            },
-            text: {
-              DEFAULT: '#e6e7eb',
-              soft: '#b9c0cc',
-            },
-            accent: {
-              green: '#24D082',
-              teal: '#1ED6BE',
-              blue: '#30A8F7'
-            }
-          },
-          boxShadow: {
-            elev: '0 10px 30px rgba(0,0,0,.35)',
-            glow: '0 0 0 2px rgba(36,208,130,.18), 0 35px 60px -15px rgba(36,208,130,.45)',
-          },
-          borderRadius: {
-            xl2: '1rem',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    :root { color-scheme: dark; }
-    body { background-image: radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
-                         radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
-    }
-    /* Underline accent utility */
-    .u-underline { box-shadow: inset 0 -0.2em 0 rgba(36,208,130,.8); }
-    /* Multi-layer card (stacked shadow) */
-    .stacked::before, .stacked::after { content: ""; position: absolute; inset: 0; border-radius: 16px; z-index: -2; }
-    .stacked::before { translate: 8px 18px; background: linear-gradient(135deg, #24D082, #30A8F7); opacity: .95; }
-    .stacked::after { translate: 16px 34px; background: linear-gradient(135deg, #1ED6BE, #30A8F7); opacity: .75; }
-    /* Accessible focus ring */
-    :focus-visible { outline: 2px solid #30A8F7; outline-offset: 2px; }
-  </style>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Landing – Boilerplate (clon legal)</title>
+<meta content="Landing dark moderna con secciones: hero + formulario, features, proceso 1–2–3, diferencial comparativo, precios, nosotros, FAQ, contacto y footer." name="description"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<link href="assets/css/styles.css" rel="stylesheet"/></head>
 <body class="min-h-dvh bg-base-900 text-text">
-  <!-- Skip link -->
-  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:left-4 focus:top-4 bg-base-700 px-3 py-2 rounded">Saltar al contenido</a>
-
-  <!-- Header sticky -->
-  <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-base-900/70 bg-base-900/95 border-b border-white/5">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="flex h-16 items-center justify-between">
-        <a href="#" class="flex items-center gap-2" aria-label="Logo">
-          <span class="inline-grid place-items-center w-9 h-9 rounded-lg bg-gradient-to-br from-accent-green to-accent-blue text-black font-extrabold">S</span>
-          <span class="font-semibold tracking-tight">Tu Marca</span>
-        </a>
-        <button id="btnMenu" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded border border-white/10 hover:bg-white/5" aria-controls="nav" aria-expanded="false" aria-label="Abrir menú">☰</button>
-        <nav id="nav" class="hidden md:flex items-center gap-6" aria-label="Principal">
-          <a class="hover:text-white" href="#portfolio">Portfolio</a>
-          <a class="hover:text-white" href="#proceso">Proceso</a>
-          <a class="hover:text-white" href="#diferencial">Diferencial</a>
-          <a class="hover:text-white" href="#precios">Precios</a>
-          <a class="hover:text-white" href="#nosotros">Nosotros</a>
-          <a class="hover:text-white" href="#contacto">Contacto</a>
-        </nav>
-      </div>
-      <!-- mobile menu -->
-      <div id="navMobile" class="md:hidden hidden border-t border-white/5 py-3" aria-label="Menú móvil">
-        <div class="grid gap-2">
-          <a class="py-2" href="#portfolio">Portfolio</a>
-          <a class="py-2" href="#proceso">Proceso</a>
-          <a class="py-2" href="#diferencial">Diferencial</a>
-          <a class="py-2" href="#precios">Precios</a>
-          <a class="py-2" href="#nosotros">Nosotros</a>
-          <a class="py-2" href="#contacto">Contacto</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="contenido" class="isolate">
-    <!-- HERO ===================================================== -->
-    <section id="hero" class="relative overflow-hidden">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-24">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <!-- copy -->
-          <div>
-            <p class="text-accent-green font-semibold tracking-wider">HECHO EN TU PAÍS</p>
-            <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold leading-tight">
+<!-- Skip link -->
+<a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:left-4 focus:top-4 bg-base-700 px-3 py-2 rounded" href="#contenido">Saltar al contenido</a>
+<!-- Header sticky -->
+<header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-base-900/70 bg-base-900/95 border-b border-white/5">
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+<div class="flex h-16 items-center justify-between">
+<a aria-label="Logo" class="flex items-center gap-2" href="#">
+<span class="inline-grid place-items-center w-9 h-9 rounded-lg bg-gradient-to-br from-accent-green to-accent-blue text-black font-extrabold">S</span>
+<span class="font-semibold tracking-tight">Tu Marca</span>
+</a>
+<button aria-controls="nav" aria-expanded="false" aria-label="Abrir menú" class="md:hidden inline-flex items-center gap-2 px-3 py-2 rounded border border-white/10 hover:bg-white/5" id="btnMenu">☰</button>
+<nav aria-label="Principal" class="hidden md:flex items-center gap-6" id="nav">
+<a class="hover:text-white" href="#portfolio">Portfolio</a>
+<a class="hover:text-white" href="#proceso">Proceso</a>
+<a class="hover:text-white" href="#diferencial">Diferencial</a>
+<a class="hover:text-white" href="#precios">Precios</a>
+<a class="hover:text-white" href="#nosotros">Nosotros</a>
+<a class="hover:text-white" href="#contacto">Contacto</a>
+</nav>
+</div>
+<!-- mobile menu -->
+<div aria-label="Menú móvil" class="md:hidden hidden border-t border-white/5 py-3" id="navMobile">
+<div class="grid gap-2">
+<a class="py-2" href="#portfolio">Portfolio</a>
+<a class="py-2" href="#proceso">Proceso</a>
+<a class="py-2" href="#diferencial">Diferencial</a>
+<a class="py-2" href="#precios">Precios</a>
+<a class="py-2" href="#nosotros">Nosotros</a>
+<a class="py-2" href="#contacto">Contacto</a>
+</div>
+</div>
+</div>
+</header>
+<main class="isolate" id="contenido">
+<!-- HERO ===================================================== -->
+<section class="relative overflow-hidden" id="hero">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-24">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<!-- copy -->
+<div>
+<p class="text-accent-green font-semibold tracking-wider">HECHO EN TU PAÍS</p>
+<h1 class="mt-3 text-4xl sm:text-5xl font-extrabold leading-tight">
               Creamos tu página web <span class="u-underline">100% personalizada</span>
-            </h1>
-            <ul class="mt-6 grid gap-3">
-              <li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>Partner estratégico, soporte humano todos los días.</span></li>
-              <li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>No pagas hasta que tu sitio esté publicado.</span></li>
-              <li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>Precio accesible – desde <b>$XXXX</b> mensuales.</span></li>
-            </ul>
-            <div class="mt-8 flex flex-wrap gap-4">
-              <a class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110 focus-visible:outline-none" href="#contacto">
-                Contáctanos <span aria-hidden>→</span>
-              </a>
-              <a class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/10 hover:bg-white/5" href="#precios">
+</h1>
+<ul class="mt-6 grid gap-3">
+<li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>Partner estratégico, soporte humano todos los días.</span></li>
+<li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>No pagas hasta que tu sitio esté publicado.</span></li>
+<li class="flex gap-3"><span class="mt-1 inline-flex w-5 h-5 rounded-full bg-accent-green/10 text-accent-green items-center justify-center">★</span><span>Precio accesible – desde <b>$XXXX</b> mensuales.</span></li>
+</ul>
+<div class="mt-8 flex flex-wrap gap-4">
+<a class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110 focus-visible:outline-none" href="#contacto">
+                Contáctanos <span aria-hidden="">→</span>
+</a>
+<a class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/10 hover:bg-white/5" href="#precios">
                 Ver Precios
               </a>
-            </div>
-          </div>
-          <!-- form card -->
-          <div class="relative">
-            <div class="relative stacked">
-              <form class="relative z-10 rounded-2xl bg-white text-black shadow-elev p-6 sm:p-8">
-                <div class="grid gap-4">
-                  <label class="block">
-                    <span class="sr-only">Nombre completo</span>
-                    <input required type="text" placeholder="Nombre completo" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" />
-                  </label>
-                  <label class="block">
-                    <span class="sr-only">Correo</span>
-                    <input required type="email" placeholder="Correo electrónico" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" />
-                  </label>
-                  <label class="block">
-                    <span class="sr-only">Celular</span>
-                    <input type="tel" placeholder="Celular" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" />
-                  </label>
-                  <label class="block">
-                    <span class="sr-only">Mensaje</span>
-                    <textarea rows="4" placeholder="¿Cómo podemos ayudar?" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green"></textarea>
-                  </label>
-                  <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110">
-                    Enviar <span aria-hidden>➜</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <svg class="absolute bottom-0 left-0 right-0 text-base-800" viewBox="0 0 1440 120" fill="currentColor" aria-hidden="true"><path d="M0,64L1440,0L1440,0L0,0Z"/></svg>
-    </section>
-
-    <!-- FEATURES / BENEFICIOS =================================== -->
-    <section id="portfolio" class="py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6">
-        <header class="text-center max-w-3xl mx-auto">
-          <p class="text-accent-green font-semibold tracking-wider">POTENCIAMOS TU PRESENCIA</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Te acompañamos a crecer en la era digital</h2>
-          <p class="mt-3 text-text-soft">Texto de ejemplo; reemplázalo por tu propuesta de valor.</p>
-        </header>
-        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <!-- card -->
-          <article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
-            <div class="text-accent-green text-4xl">✎</div>
-            <h3 class="mt-4 font-bold uppercase tracking-wide">Mantenimiento continuo</h3>
-            <p class="mt-2 text-text-soft">Cambios sin fricción; tu web siempre actualizada.</p>
-          </article>
-          <article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
-            <div class="text-accent-green text-4xl">▣</div>
-            <h3 class="mt-4 font-bold uppercase tracking-wide">Valor incomparable</h3>
-            <p class="mt-2 text-text-soft">Diseño de calidad con enfoque en resultados.</p>
-          </article>
-          <article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
-            <div class="text-accent-green text-4xl">◆</div>
-            <h3 class="mt-4 font-bold uppercase tracking-wide">Pagas al publicar</h3>
-            <p class="mt-2 text-text-soft">Sin riesgo: comenzás a pagar al lanzar.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESO 1–2–3 ============================================ -->
-    <section id="proceso" class="py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6">
-        <header class="text-center max-w-2xl mx-auto">
-          <p class="text-accent-green font-semibold tracking-wider">PASOS A SEGUIR</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Cómo es el Proceso</h2>
-        </header>
-        <div class="mt-12 grid gap-10 md:grid-cols-3">
-          <div class="space-y-4">
-            <div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">1</div>
-            <h3 class="font-semibold">Conversamos y te escuchamos</h3>
-            <ul class="space-y-2 text-text-soft">
-              <li>Entendemos tus necesidades.</li>
-              <li>Definimos estrategia y contenidos.</li>
-              <li>Roadmap inicial y alcances.</li>
-            </ul>
-          </div>
-          <div class="space-y-4">
-            <div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">2</div>
-            <h3 class="font-semibold">Implementamos tu web</h3>
-            <ul class="space-y-2 text-text-soft">
-              <li>Diseño colaborativo y prototipos.</li>
-              <li>Desarrollo con revisión continua.</li>
-              <li>Publicación y checklist final.</li>
-            </ul>
-          </div>
-          <div class="space-y-4">
-            <div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">3</div>
-            <h3 class="font-semibold">Acompañamiento y seguridad</h3>
-            <ul class="space-y-2 text-text-soft">
-              <li>Soporte diario y mejoras.</li>
-              <li>Hosting y correos gestionados.</li>
-              <li>Monitoreo de performance.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIFERENCIAL (comparativa) ================================ -->
-    <section id="diferencial" class="py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6">
-        <header class="text-center max-w-3xl mx-auto">
-          <p class="text-accent-green font-semibold tracking-wider">DIFERENCIAL</p>
-          <h2 class="mt-2 text-4xl font-extrabold">¿Por qué elegirnos?</h2>
-        </header>
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <!-- Col 1 -->
-          <div class="space-y-4">
-            <h3 class="text-xl font-semibold flex items-center gap-2"><span class="inline-grid w-6 h-6 rounded bg-gradient-to-br from-accent-green to-accent-blue"></span> Nosotros</h3>
-            <ul class="space-y-3">
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Bajo costo – plan mensual</li>
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Atención humana diaria</li>
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Cuidado integral (sitio + hosting + correos)</li>
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Desarrollo personalizado</li>
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Diseño moderno y mantenido</li>
-            </ul>
-          </div>
-          <!-- Col 2 -->
-          <div class="space-y-4 opacity-80">
-            <h3 class="text-xl font-semibold">Agencias</h3>
-            <ul class="space-y-3 text-text-soft">
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Inversión inicial alta</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Atención por tickets</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Acompañamiento variable</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Personalización parcial o templates</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Diseño de única vez</li>
-            </ul>
-          </div>
-          <!-- Col 3 -->
-          <div class="space-y-4 opacity-80">
-            <h3 class="text-xl font-semibold">Freelancers</h3>
-            <ul class="space-y-3 text-text-soft">
-              <li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔/—</span> Costo variable</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Atención irregular</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Acompañamiento mínimo</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Orientado a templates</li>
-              <li class="flex items-start gap-3"><span class="mt-1">—</span> Diseño único</li>
-            </ul>
-          </div>
-        </div>
-        <div class="text-center mt-12">
-          <a href="#contacto" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110">Quiero probar</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRECIOS =================================================== -->
-    <section id="precios" class="py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6">
-        <header class="text-center max-w-3xl mx-auto">
-          <p class="text-accent-green font-semibold tracking-wider">PRECIOS</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Tu sitio por una mínima cuota mensual</h2>
-          <p class="mt-3 text-text-soft">Sin inversión inicial, sin riesgos. Comenzás a pagar cuando se publique.</p>
-        </header>
-
-        <div class="mt-12 grid gap-12">
-          <!-- Plan 1 -->
-          <div class="grid lg:grid-cols-[1fr,320px] gap-8 items-stretch">
-            <article class="rounded-2xl bg-white text-black p-8 shadow-elev">
-              <h3 class="text-2xl font-bold flex items-center gap-2">Sitio Corporativo</h3>
-              <p class="mt-2 text-black/70">Para servicios y presencia online.</p>
-              <div class="mt-6 grid sm:grid-cols-2 gap-3 text-black/80">
-                <p>Diseño personalizado</p>
-                <p>Hasta 8 secciones</p>
-                <p>Hosting + correos</p>
-                <p>Soporte humano diario</p>
-              </div>
-            </article>
-            <aside class="relative rounded-2xl bg-base-800 p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-              <p class="uppercase tracking-widest text-text-soft">Cuota mensual de solo</p>
-              <p class="mt-3 text-5xl font-extrabold">$XXXX</p>
-              <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110">Consultar</a>
-              <p class="mt-2 text-xs text-text-soft">Mirá un ejemplo</p>
-            </aside>
-          </div>
-
-          <!-- Plan 2 -->
-          <div class="grid lg:grid-cols-[1fr,320px] gap-8 items-stretch">
-            <article class="rounded-2xl bg-white text-black p-8 shadow-elev">
-              <h3 class="text-2xl font-bold flex items-center gap-2">Tienda Online</h3>
-              <p class="mt-2 text-black/70">E‑commerce personalizado a tus necesidades.</p>
-              <div class="mt-6 grid sm:grid-cols-2 gap-3 text-black/80">
-                <p>Diseño a medida</p>
-                <p>Integración con pasarelas</p>
-                <p>Hosting + correos</p>
-                <p>Carga inicial de productos</p>
-              </div>
-            </article>
-            <aside class="relative rounded-2xl bg-base-800 p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-              <p class="uppercase tracking-widest text-text-soft">Cuota mensual de solo</p>
-              <p class="mt-3 text-5xl font-extrabold">$YYYY</p>
-              <a href="#contacto" class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110">Consultar</a>
-              <p class="mt-2 text-xs text-text-soft">Mirá un ejemplo</p>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NOSOTROS (texto + tarjeta apilada) ======================== -->
-    <section id="nosotros" class="py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-start">
-        <div>
-          <p class="text-accent-green font-semibold tracking-wider">POR QUÉ ELEGIRNOS</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Nos enfocamos en acompañarte a crecer</h2>
-          <a class="mt-6 inline-flex items-center gap-2 link-action" href="#contacto">Coordiná una llamada estratégica</a>
-        </div>
-        <div class="relative stacked">
-          <article class="relative z-10 bg-white text-black rounded-2xl p-8 shadow-elev">
-            <p class="leading-relaxed">Texto de ejemplo para tu manifiesto. Sustitúyelo por tu historia, valores y promesa de servicio. Mantén párrafos cortos y claros.</p>
-            <p class="mt-4 leading-relaxed">Incluye foco en acompañamiento humano, mantenimiento continuo, relaciones de largo plazo y seguridad en la publicación.</p>
-            <p class="mt-8">— Tu Nombre<br><span class="text-black/60">Director</span></p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ ======================================================= -->
-    <section id="faq" class="py-24">
-      <div class="mx-auto max-w-3xl px-4 sm:px-6">
-        <header class="text-center">
-          <p class="text-accent-green font-semibold tracking-wider">FAQ</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Preguntas Frecuentes</h2>
-        </header>
-        <div class="mt-10 divide-y divide-white/10 border-t border-b border-white/10">
-          <!-- Item -->
-          <details class="group">
-            <summary class="flex cursor-pointer items-center justify-between py-5 font-medium">
+</div>
+</div>
+<!-- form card -->
+<div class="relative">
+<div class="relative stacked">
+<form class="relative z-10 rounded-2xl bg-white text-black shadow-elev p-6 sm:p-8">
+<div class="grid gap-4">
+<label class="block">
+<span class="sr-only">Nombre completo</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Nombre completo" required="" type="text"/>
+</label>
+<label class="block">
+<span class="sr-only">Correo</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Correo electrónico" required="" type="email"/>
+</label>
+<label class="block">
+<span class="sr-only">Celular</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Celular" type="tel"/>
+</label>
+<label class="block">
+<span class="sr-only">Mensaje</span>
+<textarea class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="¿Cómo podemos ayudar?" rows="4"></textarea>
+</label>
+<button class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110" type="submit">
+                    Enviar <span aria-hidden="">➜</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<svg aria-hidden="true" class="absolute bottom-0 left-0 right-0 text-base-800" fill="currentColor" viewbox="0 0 1440 120"><path d="M0,64L1440,0L1440,0L0,0Z"></path></svg>
+</section>
+<!-- FEATURES / BENEFICIOS =================================== -->
+<section class="py-24" id="portfolio">
+<div class="mx-auto max-w-6xl px-4 sm:px-6">
+<header class="text-center max-w-3xl mx-auto">
+<p class="text-accent-green font-semibold tracking-wider">POTENCIAMOS TU PRESENCIA</p>
+<h2 class="mt-2 text-4xl font-extrabold">Te acompañamos a crecer en la era digital</h2>
+<p class="mt-3 text-text-soft">Texto de ejemplo; reemplázalo por tu propuesta de valor.</p>
+</header>
+<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<!-- card -->
+<article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
+<div class="text-accent-green text-4xl">✎</div>
+<h3 class="mt-4 font-bold uppercase tracking-wide">Mantenimiento continuo</h3>
+<p class="mt-2 text-text-soft">Cambios sin fricción; tu web siempre actualizada.</p>
+</article>
+<article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
+<div class="text-accent-green text-4xl">▣</div>
+<h3 class="mt-4 font-bold uppercase tracking-wide">Valor incomparable</h3>
+<p class="mt-2 text-text-soft">Diseño de calidad con enfoque en resultados.</p>
+</article>
+<article class="rounded-2xl border border-white/10 bg-base-800 p-6 shadow-elev">
+<div class="text-accent-green text-4xl">◆</div>
+<h3 class="mt-4 font-bold uppercase tracking-wide">Pagas al publicar</h3>
+<p class="mt-2 text-text-soft">Sin riesgo: comenzás a pagar al lanzar.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- PROCESO 1–2–3 ============================================ -->
+<section class="py-24" id="proceso">
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+<header class="text-center max-w-2xl mx-auto">
+<p class="text-accent-green font-semibold tracking-wider">PASOS A SEGUIR</p>
+<h2 class="mt-2 text-4xl font-extrabold">Cómo es el Proceso</h2>
+</header>
+<div class="mt-12 grid gap-10 md:grid-cols-3">
+<div class="space-y-4">
+<div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">1</div>
+<h3 class="font-semibold">Conversamos y te escuchamos</h3>
+<ul class="space-y-2 text-text-soft">
+<li>Entendemos tus necesidades.</li>
+<li>Definimos estrategia y contenidos.</li>
+<li>Roadmap inicial y alcances.</li>
+</ul>
+</div>
+<div class="space-y-4">
+<div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">2</div>
+<h3 class="font-semibold">Implementamos tu web</h3>
+<ul class="space-y-2 text-text-soft">
+<li>Diseño colaborativo y prototipos.</li>
+<li>Desarrollo con revisión continua.</li>
+<li>Publicación y checklist final.</li>
+</ul>
+</div>
+<div class="space-y-4">
+<div class="mx-auto w-14 h-14 rounded-full grid place-items-center bg-accent-green/15 text-accent-green font-bold text-2xl">3</div>
+<h3 class="font-semibold">Acompañamiento y seguridad</h3>
+<ul class="space-y-2 text-text-soft">
+<li>Soporte diario y mejoras.</li>
+<li>Hosting y correos gestionados.</li>
+<li>Monitoreo de performance.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- DIFERENCIAL (comparativa) ================================ -->
+<section class="py-24" id="diferencial">
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+<header class="text-center max-w-3xl mx-auto">
+<p class="text-accent-green font-semibold tracking-wider">DIFERENCIAL</p>
+<h2 class="mt-2 text-4xl font-extrabold">¿Por qué elegirnos?</h2>
+</header>
+<div class="mt-12 grid gap-8 md:grid-cols-3">
+<!-- Col 1 -->
+<div class="space-y-4">
+<h3 class="text-xl font-semibold flex items-center gap-2"><span class="inline-grid w-6 h-6 rounded bg-gradient-to-br from-accent-green to-accent-blue"></span> Nosotros</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Bajo costo – plan mensual</li>
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Atención humana diaria</li>
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Cuidado integral (sitio + hosting + correos)</li>
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Desarrollo personalizado</li>
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔</span> Diseño moderno y mantenido</li>
+</ul>
+</div>
+<!-- Col 2 -->
+<div class="space-y-4 opacity-80">
+<h3 class="text-xl font-semibold">Agencias</h3>
+<ul class="space-y-3 text-text-soft">
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Inversión inicial alta</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Atención por tickets</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Acompañamiento variable</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Personalización parcial o templates</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Diseño de única vez</li>
+</ul>
+</div>
+<!-- Col 3 -->
+<div class="space-y-4 opacity-80">
+<h3 class="text-xl font-semibold">Freelancers</h3>
+<ul class="space-y-3 text-text-soft">
+<li class="flex items-start gap-3"><span class="mt-1 text-accent-green">✔/—</span> Costo variable</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Atención irregular</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Acompañamiento mínimo</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Orientado a templates</li>
+<li class="flex items-start gap-3"><span class="mt-1">—</span> Diseño único</li>
+</ul>
+</div>
+</div>
+<div class="text-center mt-12">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110" href="#contacto">Quiero probar</a>
+</div>
+</div>
+</section>
+<!-- PRECIOS =================================================== -->
+<section class="py-24" id="precios">
+<div class="mx-auto max-w-7xl px-4 sm:px-6">
+<header class="text-center max-w-3xl mx-auto">
+<p class="text-accent-green font-semibold tracking-wider">PRECIOS</p>
+<h2 class="mt-2 text-4xl font-extrabold">Tu sitio por una mínima cuota mensual</h2>
+<p class="mt-3 text-text-soft">Sin inversión inicial, sin riesgos. Comenzás a pagar cuando se publique.</p>
+</header>
+<div class="mt-12 grid gap-12">
+<!-- Plan 1 -->
+<div class="grid lg:grid-cols-[1fr,320px] gap-8 items-stretch">
+<article class="rounded-2xl bg-white text-black p-8 shadow-elev">
+<h3 class="text-2xl font-bold flex items-center gap-2">Sitio Corporativo</h3>
+<p class="mt-2 text-black/70">Para servicios y presencia online.</p>
+<div class="mt-6 grid sm:grid-cols-2 gap-3 text-black/80">
+<p>Diseño personalizado</p>
+<p>Hasta 8 secciones</p>
+<p>Hosting + correos</p>
+<p>Soporte humano diario</p>
+</div>
+</article>
+<aside class="relative rounded-2xl bg-base-800 p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+<p class="uppercase tracking-widest text-text-soft">Cuota mensual de solo</p>
+<p class="mt-3 text-5xl font-extrabold">$XXXX</p>
+<a class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110" href="#contacto">Consultar</a>
+<p class="mt-2 text-xs text-text-soft">Mirá un ejemplo</p>
+</aside>
+</div>
+<!-- Plan 2 -->
+<div class="grid lg:grid-cols-[1fr,320px] gap-8 items-stretch">
+<article class="rounded-2xl bg-white text-black p-8 shadow-elev">
+<h3 class="text-2xl font-bold flex items-center gap-2">Tienda Online</h3>
+<p class="mt-2 text-black/70">E‑commerce personalizado a tus necesidades.</p>
+<div class="mt-6 grid sm:grid-cols-2 gap-3 text-black/80">
+<p>Diseño a medida</p>
+<p>Integración con pasarelas</p>
+<p>Hosting + correos</p>
+<p>Carga inicial de productos</p>
+</div>
+</article>
+<aside class="relative rounded-2xl bg-base-800 p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+<p class="uppercase tracking-widest text-text-soft">Cuota mensual de solo</p>
+<p class="mt-3 text-5xl font-extrabold">$YYYY</p>
+<a class="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110" href="#contacto">Consultar</a>
+<p class="mt-2 text-xs text-text-soft">Mirá un ejemplo</p>
+</aside>
+</div>
+</div>
+</div>
+</section>
+<!-- NOSOTROS (texto + tarjeta apilada) ======================== -->
+<section class="py-24" id="nosotros">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-start">
+<div>
+<p class="text-accent-green font-semibold tracking-wider">POR QUÉ ELEGIRNOS</p>
+<h2 class="mt-2 text-4xl font-extrabold">Nos enfocamos en acompañarte a crecer</h2>
+<a class="mt-6 inline-flex items-center gap-2 link-action" href="#contacto">Coordiná una llamada estratégica</a>
+</div>
+<div class="relative stacked">
+<article class="relative z-10 bg-white text-black rounded-2xl p-8 shadow-elev">
+<p class="leading-relaxed">Texto de ejemplo para tu manifiesto. Sustitúyelo por tu historia, valores y promesa de servicio. Mantén párrafos cortos y claros.</p>
+<p class="mt-4 leading-relaxed">Incluye foco en acompañamiento humano, mantenimiento continuo, relaciones de largo plazo y seguridad en la publicación.</p>
+<p class="mt-8">— Tu Nombre<br/><span class="text-black/60">Director</span></p>
+</article>
+</div>
+</div>
+</section>
+<!-- FAQ ======================================================= -->
+<section class="py-24" id="faq">
+<div class="mx-auto max-w-3xl px-4 sm:px-6">
+<header class="text-center">
+<p class="text-accent-green font-semibold tracking-wider">FAQ</p>
+<h2 class="mt-2 text-4xl font-extrabold">Preguntas Frecuentes</h2>
+</header>
+<div class="mt-10 divide-y divide-white/10 border-t border-b border-white/10">
+<!-- Item -->
+<details class="group">
+<summary class="flex cursor-pointer items-center justify-between py-5 font-medium">
               ¿Cuándo empiezo a pagar?
-              <span class="ml-4 transition-transform group-open:rotate-180" aria-hidden>⌄</span>
-            </summary>
-            <div class="pb-6 text-text-soft">Pagás cuando se publique tu sitio (modificá esta política a tu realidad).</div>
-          </details>
-          <details class="group">
-            <summary class="flex cursor-pointer items-center justify-between py-5 font-medium">¿Cuánto demoro en publicar?
-              <span class="ml-4 transition-transform group-open:rotate-180" aria-hidden>⌄</span>
-            </summary>
-            <div class="pb-6 text-text-soft">Sujeto a alcance y tiempos de aprobación. Define tus plazos objetivos.</div>
-          </details>
-          <details class="group">
-            <summary class="flex cursor-pointer items-center justify-between py-5 font-medium">¿Puedo personalizar el diseño?
-              <span class="ml-4 transition-transform group-open:rotate-180" aria-hidden>⌄</span>
-            </summary>
-            <div class="pb-6 text-text-soft">Sí, trabajamos con diseño a medida y componentes reutilizables.</div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACTO ================================================== -->
-    <section id="contacto" class="py-24">
-      <div class="mx-auto max-w-6xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-start">
-        <div>
-          <p class="text-accent-green font-semibold tracking-wider">CONTACTO</p>
-          <h2 class="mt-2 text-4xl font-extrabold">Contanos tu proyecto</h2>
-          <p class="mt-3 text-text-soft">También podés escribir por WhatsApp.</p>
-          <form class="mt-8 grid gap-4 bg-white text-black rounded-2xl p-6 shadow-elev">
-            <label class="block">
-              <span class="sr-only">Nombre</span>
-              <input type="text" placeholder="Nombre completo" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" required>
-            </label>
-            <label class="block">
-              <span class="sr-only">Correo</span>
-              <input type="email" placeholder="Correo electrónico" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" required>
-            </label>
-            <label class="block">
-              <span class="sr-only">Celular</span>
-              <input type="tel" placeholder="Celular" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green">
-            </label>
-            <label class="block">
-              <span class="sr-only">Mensaje</span>
-              <textarea rows="4" placeholder="¿Cómo podemos ayudar?" class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green"></textarea>
-            </label>
-            <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110">Enviar</button>
-          </form>
-        </div>
-        <div>
-          <div class="rounded-2xl overflow-hidden border border-white/10">
-            <!-- Mapa placeholder accesible (reemplazar por iframe de tu mapa) -->
-            <div class="aspect-[16/9] grid place-items-center bg-base-800 text-text-soft">Mapa / iframe aquí</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer ====================================================== -->
-  <footer class="border-t border-white/5">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-16 text-center">
-      <div class="inline-grid place-items-center w-10 h-10 rounded-lg bg-gradient-to-br from-accent-green to-accent-blue text-black font-extrabold">S</div>
-      <p class="mt-6"><a class="link-action" href="https://wa.me/0000000000" target="_blank" rel="noopener">Escribinos por WhatsApp</a></p>
-      <p class="mt-8 text-sm text-text-soft">© 2025 Tu Marca. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-
-  <!-- WhatsApp floating button (opcional) -->
-  <a id="whatsappbtn" aria-label="Chat por WhatsApp" href="https://wa.me/0000000000" target="_blank" rel="noopener"
-     class="fixed bottom-6 right-6 grid place-items-center w-12 h-12 rounded-full bg-accent-green text-black shadow-glow hover:brightness-110">
+              <span aria-hidden="" class="ml-4 transition-transform group-open:rotate-180">⌄</span>
+</summary>
+<div class="pb-6 text-text-soft">Pagás cuando se publique tu sitio (modificá esta política a tu realidad).</div>
+</details>
+<details class="group">
+<summary class="flex cursor-pointer items-center justify-between py-5 font-medium">¿Cuánto demoro en publicar?
+              <span aria-hidden="" class="ml-4 transition-transform group-open:rotate-180">⌄</span>
+</summary>
+<div class="pb-6 text-text-soft">Sujeto a alcance y tiempos de aprobación. Define tus plazos objetivos.</div>
+</details>
+<details class="group">
+<summary class="flex cursor-pointer items-center justify-between py-5 font-medium">¿Puedo personalizar el diseño?
+              <span aria-hidden="" class="ml-4 transition-transform group-open:rotate-180">⌄</span>
+</summary>
+<div class="pb-6 text-text-soft">Sí, trabajamos con diseño a medida y componentes reutilizables.</div>
+</details>
+</div>
+</div>
+</section>
+<!-- CONTACTO ================================================== -->
+<section class="py-24" id="contacto">
+<div class="mx-auto max-w-6xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-start">
+<div>
+<p class="text-accent-green font-semibold tracking-wider">CONTACTO</p>
+<h2 class="mt-2 text-4xl font-extrabold">Contanos tu proyecto</h2>
+<p class="mt-3 text-text-soft">También podés escribir por WhatsApp.</p>
+<form class="mt-8 grid gap-4 bg-white text-black rounded-2xl p-6 shadow-elev">
+<label class="block">
+<span class="sr-only">Nombre</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Nombre completo" required="" type="text"/>
+</label>
+<label class="block">
+<span class="sr-only">Correo</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Correo electrónico" required="" type="email"/>
+</label>
+<label class="block">
+<span class="sr-only">Celular</span>
+<input class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="Celular" type="tel"/>
+</label>
+<label class="block">
+<span class="sr-only">Mensaje</span>
+<textarea class="w-full rounded-lg border border-black/10 px-4 py-3 outline-none focus:ring-2 focus:ring-accent-green" placeholder="¿Cómo podemos ayudar?" rows="4"></textarea>
+</label>
+<button class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-accent-green text-black font-semibold shadow-glow hover:brightness-110" type="submit">Enviar</button>
+</form>
+</div>
+<div>
+<div class="rounded-2xl overflow-hidden border border-white/10">
+<!-- Mapa placeholder accesible (reemplazar por iframe de tu mapa) -->
+<div class="aspect-[16/9] grid place-items-center bg-base-800 text-text-soft">Mapa / iframe aquí</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer ====================================================== -->
+<footer class="border-t border-white/5">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 py-16 text-center">
+<div class="inline-grid place-items-center w-10 h-10 rounded-lg bg-gradient-to-br from-accent-green to-accent-blue text-black font-extrabold">S</div>
+<p class="mt-6"><a class="link-action" href="https://wa.me/0000000000" rel="noopener" target="_blank">Escribinos por WhatsApp</a></p>
+<p class="mt-8 text-sm text-text-soft">© 2025 Tu Marca. Todos los derechos reservados.</p>
+</div>
+</footer>
+<!-- WhatsApp floating button (opcional) -->
+<a aria-label="Chat por WhatsApp" class="fixed bottom-6 right-6 grid place-items-center w-12 h-12 rounded-full bg-accent-green text-black shadow-glow hover:brightness-110" href="https://wa.me/0000000000" id="whatsappbtn" rel="noopener" target="_blank">
      🟢
   </a>
 
-  <script>
-    // MENU mobile toggle
-    const btn = document.getElementById('btnMenu');
-    const nav = document.getElementById('navMobile');
-    btn?.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      nav.classList.toggle('hidden');
-    });
 
-    // Smooth scroll fix for anchor focus
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if (!id || id === '#') return;
-        const el = document.querySelector(id);
-        if (el) {
-          e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          el.setAttribute('tabindex', '-1');
-          el.focus({ preventScroll: true });
-        }
-      });
-    });
-
-    // Pruebas rápidas (console.assert)
-    console.assert(document.querySelector('#hero') && document.querySelector('#precios'), 'Secciones clave presentes');
-    console.assert(window.getComputedStyle(document.body).backgroundImage.includes('radial-gradient'), 'Fondo decorativo activo');
-  </script>
-</body>
+<script src="assets/js/main.js" type="module"></script></body>
 </html>
