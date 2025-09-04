@@ -1,0 +1,214 @@
+/* ============ BASE (mobile-first, limpio) ============ */
+:root{
+  color-scheme: dark;
+  --bg-900:#111418;        /* un poco más gris */
+  --bg-800:#161a1f;
+  --accent-green:#24D082;
+  --accent-teal:#1ED6BE;
+  --accent-blue:#30A8F7;
+}
+
+html,body{ background:#0f1318; }
+body{
+  /* halos suaves */
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
+    radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
+}
+
+/* Utilidad de subrayado (separación un poquito mayor) */
+.u-underline{
+  display:inline;
+  box-shadow: inset 0 -.28em 0 rgba(36,208,130,.18);
+  line-height:1.1;
+  padding-bottom:.04em;
+}
+
+/* Anillo de foco accesible */
+:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
+
+/* ============ HERO ============ */
+/* Hero con rayas sutiles; SIN curva ::after (ya tienes el SVG ondulado) */
+#hero{ position:relative; overflow:hidden; background:transparent; }
+#hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(150deg,
+      rgba(255,255,255,.04), rgba(255,255,255,.04) 2px,
+      transparent 2px, transparent 22px);
+  opacity:.18; pointer-events:none;
+}
+
+/* Texto centrado y tamaños en móvil */
+@media (max-width:480px){
+  #hero .grid > div:first-child{ text-align:center; }
+  #hero h1{
+    font-size: clamp(1.75rem, 6vw + .5rem, 2.25rem) !important;
+    line-height:1.1 !important;
+    letter-spacing:-.2px;
+  }
+  #hero ul{ margin-left:auto; margin-right:auto; max-width:28rem; }
+  #hero ul li{ font-size:.96rem; line-height:1.5; }
+  /* un poco menos de alto para que el form “suba” */
+  #hero .mx-auto{ padding-top:1.2rem !important; padding-bottom:1.5rem !important; }
+}
+
+/* Botones como la captura 1 (sólido + outline) */
+#hero a[href="#contacto"]{
+  background:var(--accent-green) !important; color:#061017 !important; border:0 !important;
+  border-radius:12px !important; padding:14px 20px !important; font-weight:700 !important;
+  box-shadow:0 12px 30px rgba(36,208,130,.35) !important;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+#hero a[href="#contacto"]:hover{ filter:brightness(1.05) !important; transform:translateY(-1px) !important; }
+
+#hero a[href="#precios"]{
+  background:transparent !important; color:#d9e1ee !important;
+  border:1.5px solid rgba(255,255,255,.22) !important;
+  border-radius:12px !important; padding:14px 20px !important; font-weight:600 !important;
+}
+
+/* Inputs claros y compactos dentro del hero */
+#hero form input, #hero form textarea, #hero form select{
+  background:#f7f8fa !important; color:#0e1217 !important;
+  border:1.5px solid #dfe3ea !important; border-radius:12px !important;
+  padding:14px 16px !important; box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
+}
+#hero form input::placeholder, #hero form textarea::placeholder{ color:#7d8aa0 !important; }
+#hero form :is(input, textarea, select):focus{
+  outline:2px solid var(--accent-green) !important; outline-offset:2px !important; border-color:var(--accent-green) !important;
+}
+
+/* ============ FORM CARD “STACKED” ============ */
+#hero .stacked{ position:relative; isolation:isolate; }
+#hero .stacked::before,
+#hero .stacked::after{
+  content:""; position:absolute; inset:16px -16px auto auto; border-radius:18px; z-index:0;
+}
+/* Dos capas detrás (teal → blue) */
+#hero .stacked::before{
+  transform:translate(10px,12px);
+  background:linear-gradient(180deg,var(--accent-teal),transparent);
+  opacity:.9;
+}
+#hero .stacked::after{
+  transform:translate(22px,24px);
+  background:linear-gradient(180deg,var(--accent-blue),transparent);
+  opacity:.9;
+}
+/* Tamaño del panel del form */
+#hero .stacked form{
+  position:relative; z-index:1; border-radius:18px !important;
+  max-width:520px; margin-inline:auto; padding:18px 20px !important;
+}
+@media (max-width:480px){
+  #hero .stacked form{ max-width:340px; padding:16px 16px !important; }
+}
+
+
+/* === Appended by assistant === */
+
+/* ===== HERO OVERRIDE UNIVERSAL (mobile-first) ===== */
+/* Aplica a #hero, .hero o cualquier section con id que contenga "hero" */
+:root{
+  --bg-900:#111418;
+  --bg-800:#161a1f;
+  --accent-green:#24D082;
+  --accent-teal:#1ED6BE;
+  --accent-blue:#30A8F7;
+}
+html,body{ background:#0f1318 !important; }
+
+:is(#hero, .hero, section[id*="hero" i]){
+  position: relative !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+:is(#hero, .hero, section[id*="hero" i])::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(150deg,
+      rgba(255,255,255,.04), rgba(255,255,255,.04) 2px,
+      transparent 2px, transparent 22px);
+  opacity:.18; pointer-events:none;
+}
+:is(#hero, .hero, section[id*="hero" i])::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px; height:60px;
+  background: var(--bg-900);
+  clip-path: ellipse(75% 60px at 50% 0%);
+}
+
+/* Tipografía y centrado en mobile */
+@media (max-width:480px){
+  :is(#hero, .hero, section[id*="hero" i]) :is(h1,h2,h3,p,ul){ text-align:center !important; }
+  :is(#hero, .hero, section[id*="hero" i]) h1{
+    font-size: clamp(1.75rem, 6.2vw + .5rem, 2.2rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.2px !important;
+  }
+  :is(#hero, .hero, section[id*="hero" i]) ul li{
+    font-size: .96rem !important;
+    line-height: 1.5 !important;
+  }
+}
+/* Subrayado agradable */
+:is(#hero, .hero, section[id*="hero" i]) .u-underline{
+  display:inline;
+  box-shadow: inset 0 -.28em 0 rgba(36,208,130,.18) !important;
+  padding-bottom:.04em !important;
+}
+
+/* Botones (1º sólido, 2º outline) */
+:is(#hero, .hero, section[id*="hero" i]) :is(a,button){
+  border-radius:12px !important;
+  padding:14px 20px !important;
+  font-weight:700 !important;
+}
+:is(#hero, .hero, section[id*="hero" i]) :is(a,button):first-of-type{
+  background:var(--accent-green) !important; color:#061017 !important; border:0 !important;
+  box-shadow:0 12px 30px rgba(36,208,130,.35) !important;
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease !important;
+}
+:is(#hero, .hero, section[id*="hero" i]) :is(a,button):first-of-type:hover{
+  filter:brightness(1.05) !important; transform:translateY(-1px) !important;
+}
+:is(#hero, .hero, section[id*="hero" i]) :is(a,button):nth-of-type(2){
+  background:transparent !important; color:#d9e1ee !important;
+  border:1.5px solid rgba(255,255,255,.22) !important;
+  font-weight:600 !important;
+}
+
+/* Inputs claros del hero */
+:is(#hero, .hero, section[id*="hero" i]) form :is(input, textarea, select){
+  background:#f7f8fa !important; color:#0e1217 !important;
+  border:1.5px solid #dfe3ea !important; border-radius:12px !important;
+  padding:14px 16px !important; box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
+}
+:is(#hero, .hero, section[id*="hero" i]) form :is(input, textarea)::placeholder{ color:#7d8aa0 !important; }
+:is(#hero, .hero, section[id*="hero" i]) form :is(input, textarea, select):focus{
+  outline:2px solid var(--accent-green) !important; outline-offset:2px !important; border-color:var(--accent-green) !important;
+}
+
+/* Stacked card del form (si no hay wrapper aplica al <form>) */
+:is(#hero, .hero, section[id*="hero" i]) form{
+  position:relative !important; isolation:isolate !important;
+  border-radius:18px !important; z-index:1 !important;
+  max-width:520px; margin-inline:auto; padding:18px 20px !important;
+}
+:is(#hero, .hero, section[id*="hero" i]) form::before,
+:is(#hero, .hero, section[id*="hero" i]) form::after{
+  content:""; position:absolute; inset:16px -16px auto auto; border-radius:18px; z-index:-1;
+}
+:is(#hero, .hero, section[id*="hero" i]) form::before{
+  background:linear-gradient(180deg, var(--accent-teal), transparent); transform:translate(10px,12px);
+}
+:is(#hero, .hero, section[id*="hero" i]) form::after{
+  background:linear-gradient(180deg, var(--accent-blue), transparent); transform:translate(22px,24px);
+}
+@media (max-width:480px){
+  :is(#hero, .hero, section[id*="hero" i]) form{ max-width:340px; padding:16px 16px !important; }
+  :is(#hero, .hero, section[id*="hero" i]) .mx-auto{ padding-top:1.2rem !important; padding-bottom:1.5rem !important; }
+}
