@@ -1,234 +1,139 @@
-/* ==== Inline style block #1 from index_single.html ==== */
-:root { color-scheme: dark; }
-    body { background-image: radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
-                         radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
-    }
-    /* Underline accent utility */
-    .u-underline { box-shadow: inset 0 -0.2em 0 rgba(36,208,130,.8); }
-    /* Multi-layer card (stacked shadow) */
-    .stacked::before, .stacked::after { content: ""; position: absolute; inset: 0; border-radius: 16px; z-index: -2; }
-    .stacked::before { translate: 8px 18px; background: linear-gradient(135deg, #24D082, #30A8F7); opacity: .95; }
-    .stacked::after { translate: 16px 34px; background: linear-gradient(135deg, #1ED6BE, #30A8F7); opacity: .75; }
-    /* Accessible focus ring */
-    :focus-visible { outline: 2px solid #30A8F7; outline-offset: 2px; }
-/* ==== Mobile polish pack (overrides) ==== */
-
-/* Fondo un poco más claro */
+/* ============ BASE (mobile-first) ============ */
 :root{
-  --bg-900:#111418; /* antes era más negro */
+  color-scheme: dark;
+  --bg-900:#111418;        /* un poco más gris */
   --bg-800:#161a1f;
-}
-body{ background:#0f1318; }
-
-/* H1 del hero más chico en móvil */
-@media (max-width:480px){
-  .hero h1{
-    font-size: clamp(1.75rem, 6.4vw + .5rem, 2.3rem);
-    line-height: 1.1;
-  }
-  /* Bullets/textos un poco más chicos */
-  .hero .bullets li{ font-size: 0.98rem; }
+  --accent-green:#24D082;
+  --accent-teal:#1ED6BE;
+  --accent-blue:#30A8F7;
 }
 
-/* Inputs claros estilo captura 1 */
-.hero form input,
-.hero form textarea,
-form input, form textarea, form select{
-  background:#f7f8fa;
-  color:#0e1217;
-  border:1.5px solid #dfe3ea;
-  border-radius:12px;
-  padding:14px 16px;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
-}
-.hero form input::placeholder,
-.hero form textarea::placeholder{ color:#7d8aa0; }
-
-/* Foco accesible */
-form input:focus, form textarea:focus, form select:focus{
-  outline:2px solid #24D082;
-  outline-offset:2px;
-  border-color:#24D082;
+html,body{ background:#0f1318; }
+body{
+  /* halos suaves */
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
+    radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
 }
 
-/* Botón principal (sólido) */
-.button-primary, .btn-primary{
-  background:#24D082;
-  color:#061017;
-  border:0;
-  border-radius:12px;
-  padding:14px 20px;
-  font-weight:700;
-  box-shadow:0 12px 30px rgba(36,208,130,.35);
-  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
-}
-.button-primary:hover, .btn-primary:hover{
-  filter:brightness(1.05);
-  transform:translateY(-1px);
-}
-.button-primary:active, .btn-primary:active{
-  transform:none; box-shadow:0 8px 20px rgba(36,208,130,.35);
+/* Utilidad de subrayado (separación un poquito mayor) */
+.u-underline{
+  display:inline;
+  box-shadow: inset 0 -.28em 0 rgba(36,208,130,.18);
+  line-height:1.1;
+  padding-bottom:.04em;
 }
 
-/* Botón secundario (outline) */
-.button-outline, .btn-outline{
-  background:transparent;
-  color:#d9e1ee;
-  border:1.5px solid rgba(255,255,255,.22);
-  border-radius:12px;
-  padding:14px 20px;
-}
+/* Anillo de foco accesible */
+:focus-visible{ outline:2px solid var(--accent-blue); outline-offset:2px; }
 
-/* “Card apilada” del form: offset como la 1ª captura */
-.card-stack::before{ transform: translate(10px,12px); }
-.card-stack::after { transform: translate(22px,24px); }
-/* ===== Override v2 (forzar coincidencias y tamaño móvil) ===== */
+/* ============ HERO ============ */
+/* Abarco ambas notaciones: id y class */
+#hero, .hero{ position:relative; overflow:hidden; background:transparent; }
 
-/* 1) Fondo un poco más gris (menos negro) */
-:root{
-  --bg-900:#111418;
-  --bg-800:#161a1f;
-}
-html, body{ background:#0f1318 !important; }
-
-/* 2) Título del HERO más chico en móvil */
-@media (max-width: 480px){
-  /* doble selector para más especificidad + !important */
-  #hero h1, main #hero h1, section#hero h1, #hero #hero h1{
-    font-size: clamp(1.9rem, 6vw, 2.4rem) !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.3px;
-  }
-  /* Bullets/texto del hero un poco más chico */
-  #hero ul li, main #hero ul li{
-    font-size: .96rem !important;
-    line-height: 1.5 !important;
-  }
-}
-
-/* 3) Inputs claros como en la 1ª captura */
-#hero form input,
-#hero form textarea,
-form input, form textarea, form select{
-  background:#f7f8fa !important;
-  color:#0e1217 !important;
-  border:1.5px solid #dfe3ea !important;
-  border-radius:12px !important;
-  padding:14px 16px !important;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.05) !important;
-}
-form input::placeholder, form textarea::placeholder{ color:#7d8aa0 !important; }
-form input:focus, form textarea:focus, form select:focus{
-  outline:2px solid #24D082 !important;
-  outline-offset:2px !important;
-  border-color:#24D082 !important;
-}
-
-/* 4) Botón principal (sólido) y secundario (outline) dentro del HERO */
-#hero .btn, #hero a.btn, #hero .button, #hero a.button, #hero button{
-  border-radius:12px !important;
-  padding:14px 20px !important;
-  font-weight:700 !important;
-}
-#hero .btn-primary, #hero .button-primary, #hero .btn--primary{
-  background:#24D082 !important; color:#061017 !important; border:0 !important;
-  box-shadow:0 12px 30px rgba(36,208,130,.35) !important;
-  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease !important;
-}
-#hero .btn-primary:hover, #hero .button-primary:hover, #hero .btn--primary:hover{
-  filter:brightness(1.05) !important; transform:translateY(-1px) !important;
-}
-#hero .btn-outline, #hero .button-outline, #hero .btn--secondary{
-  background:transparent !important; color:#d9e1ee !important;
-  border:1.5px solid rgba(255,255,255,.22) !important;
-}
-
-/* 5) “Card apilada” del formulario (desplazamientos) */
-#hero .card-stack::before{ transform: translate(10px,12px) !important; }
-#hero .card-stack::after { transform: translate(22px,24px) !important; }
-
-
-/* === BEGIN custom overrides === */
-
-/* ==== UX polish: hero centering, sizes, buttons, stacked card, background stripes & curve ==== */
-
-/* 0) Slightly lighter dark theme */
-:root{ --bg-900:#111418; --bg-800:#161a1f; }
-html, body{ background:#0f1318; }
-
-/* 1) HERO background stripes + curved separator */
-#hero{ position:relative; overflow:hidden; }
-#hero::before{
+/* Rayas diagonales sutiles */
+#hero::before, .hero::before{
   content:"";
   position:absolute; inset:0;
   background:
-    repeating-linear-gradient( 150deg, rgba(255,255,255,.04), rgba(255,255,255,.04) 2px, transparent 2px, transparent 22px );
+    repeating-linear-gradient(150deg,
+      rgba(255,255,255,.04), rgba(255,255,255,.04) 2px,
+      transparent 2px, transparent 22px);
   opacity:.18; pointer-events:none;
 }
-#hero::after{
+
+/* Curva separadora al final del hero */
+#hero::after, .hero::after{
   content:"";
   position:absolute; left:0; right:0; bottom:-1px; height:60px;
   background: var(--bg-900);
   clip-path: ellipse(75% 60px at 50% 0%);
 }
 
-/* 2) Center hero copy on mobile and tweak heading sizes */
-@media (max-width: 480px){
-  #hero .grid > :first-child{ text-align:center; }
-  #hero h1{ font-size:clamp(1.75rem, 6.2vw + .5rem, 2.25rem)!important; line-height:1.1!important; }
-  #hero .grid > :first-child ul{ margin-left:auto; margin-right:auto; max-width:28rem; }
-  #hero .grid > :first-child ul li{ font-size:.96rem!important; }
-}
-/* underline spacing */
-#hero .u-underline{
-  box-shadow: inset 0 -.25em 0 rgba(36,208,130,.16);
-  padding-bottom:.04em;
-}
-
-/* 3) Buttons like capture 1 */
-#hero a[href="#contacto"]{
-  background:#24D082!important; color:#061017!important; border:0!important;
-  border-radius:12px!important; padding:14px 20px!important; font-weight:700!important;
-  box-shadow:0 12px 30px rgba(36,208,130,.35)!important;
-  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease!important;
-}
-#hero a[href="#contacto"]:hover{ filter:brightness(1.05)!important; transform:translateY(-1px)!important; }
-#hero a[href="#precios"]{
-  background:transparent!important; color:#d9e1ee!important;
-  border:1.5px solid rgba(255,255,255,.22)!important;
-  border-radius:12px!important; padding:14px 20px!important; font-weight:600!important;
+/* Texto centrado en móvil */
+@media (max-width:480px){
+  #hero .grid > :first-child,
+  #hero .content, #hero .copy, .hero .grid > :first-child{ text-align:center; }
+  #hero h1, .hero h1{
+    font-size: clamp(1.75rem, 6.2vw + .5rem, 2.25rem);
+    line-height:1.1;
+  }
+  #hero ul, .hero ul{ margin-left:auto; margin-right:auto; max-width:28rem; }
+  #hero ul li, .hero ul li{ font-size:.96rem; line-height:1.5; }
 }
 
-/* 4) Inputs light and compact */
-#hero form input, #hero form textarea, #hero form select{
-  background:#f7f8fa!important; color:#0e1217!important;
-  border:1.5px solid #dfe3ea!important; border-radius:12px!important;
-  padding:14px 16px!important; box-shadow: inset 0 1px 2px rgba(0,0,0,.05)!important;
+/* Botones (como la 1ª captura) */
+#hero a[href="#contacto"], .hero a[href="#contacto"],
+#hero .btn-primary, .hero .btn-primary, #hero .button-primary, .hero .button-primary{
+  background:var(--accent-green); color:#061017; border:0;
+  border-radius:12px; padding:14px 20px; font-weight:700;
+  box-shadow:0 12px 30px rgba(36,208,130,.35);
+  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
 }
-#hero form input::placeholder, #hero form textarea::placeholder{ color:#7d8aa0!important; }
-#hero form input:focus, #hero form textarea:focus{ outline:2px solid #24D082!important; outline-offset:2px!important; border-color:#24D082!important; }
-
-/* 5) Stacked card nicer & smaller */
-#hero .stacked{ position:relative; isolation:isolate; }
-#hero .stacked::before,
-#hero .stacked::after{
-  content:""; position:absolute; inset:16px -16px auto auto; border-radius:18px; z-index:0;
-}
-#hero .stacked::before{ background:linear-gradient(180deg,#1ED6BE,transparent); transform:translate(10px,12px); opacity:.9; }
-#hero .stacked::after { background:linear-gradient(180deg,#30A8F7,transparent); transform:translate(22px,24px); opacity:.9; }
-
-#hero .stacked form{
-  position:relative; z-index:1; border-radius:18px!important;
-  max-width: 520px; margin-inline:auto;
-  padding:18px 20px!important;
-}
-@media (max-width: 480px){
-  #hero .stacked form{ max-width: 360px; padding:16px 16px!important; }
+#hero a[href="#contacto"]:hover, .hero a[href="#contacto"]:hover,
+#hero .btn-primary:hover, .hero .btn-primary:hover{
+  filter:brightness(1.05); transform:translateY(-1px);
 }
 
-/* 6) Reduce hero vertical space so formulario suba más */
-@media (max-width: 480px){
-  #hero .mx-auto{ padding-top: 1.25rem!important; padding-bottom: 1.5rem!important; }
+#hero a[href="#precios"], .hero a[href="#precios"],
+#hero .btn-outline, .hero .btn-outline, #hero .button-outline, .hero .button-outline{
+  background:transparent; color:#d9e1ee;
+  border:1.5px solid rgba(255,255,255,.22);
+  border-radius:12px; padding:14px 20px; font-weight:600;
 }
 
-/* === END custom overrides === */
+/* Inputs claros y compactos (solo hero) */
+#hero form input, #hero form textarea, #hero form select,
+.hero form input, .hero form textarea, .hero form select{
+  background:#f7f8fa; color:#0e1217;
+  border:1.5px solid #dfe3ea; border-radius:12px;
+  padding:14px 16px; box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+}
+#hero form input::placeholder, #hero form textarea::placeholder,
+.hero form input::placeholder, .hero form textarea::placeholder{ color:#7d8aa0; }
+#hero form input:focus, #hero form textarea:focus, #hero form select:focus,
+.hero form input:focus, .hero form textarea:focus, .hero form select:focus{
+  outline:2px solid var(--accent-green); outline-offset:2px; border-color:var(--accent-green);
+}
+
+/* ============ FORM CARD “STACKED” ============ */
+/* Soporto .stacked y .card-stack */
+#hero .stacked, .hero .stacked,
+#hero .card-stack, .hero .card-stack{ position:relative; isolation:isolate; }
+
+#hero .stacked::before, .hero .stacked::before,
+#hero .card-stack::before, .hero .card-stack::before,
+#hero .stacked::after,  .hero .stacked::after,
+#hero .card-stack::after, .hero .card-stack::after{
+  content:""; position:absolute; border-radius:18px; z-index:0;
+}
+
+/* Dos capas detrás (teal → blue) */
+#hero .stacked::before, .hero .stacked::before,
+#hero .card-stack::before, .hero .card-stack::before{
+  inset:16px -16px auto auto; transform:translate(10px,12px);
+  background:linear-gradient(180deg,var(--accent-teal),transparent); opacity:.9;
+}
+#hero .stacked::after, .hero .stacked::after,
+#hero .card-stack::after, .hero .card-stack::after{
+  inset:16px -16px auto auto; transform:translate(22px,24px);
+  background:linear-gradient(180deg,var(--accent-blue),transparent); opacity:.9;
+}
+
+/* Tamaño del panel del form: más pequeño en móvil */
+#hero .stacked form, .hero .stacked form,
+#hero .card-stack form, .hero .card-stack form{
+  position:relative; z-index:1; border-radius:18px;
+  max-width:520px; margin-inline:auto; padding:18px 20px;
+}
+@media (max-width:480px){
+  #hero .stacked form, .hero .stacked form,
+  #hero .card-stack form, .hero .card-stack form{
+    max-width:340px; padding:16px 16px;
+  }
+}
+
+/* Un poco menos de alto en el hero para subir el form */
+@media (max-width:480px){
+  #hero .mx-auto, .hero .mx-auto{ padding-top:1.2rem; padding-bottom:1.5rem; }
+}
