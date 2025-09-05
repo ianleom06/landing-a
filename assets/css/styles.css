@@ -357,3 +357,59 @@ body{
   color: var(--g) !important; /* forzamos el verde como pediste */
   border-color: var(--g);
 }
+/* ===== HERO — PATCH #05 (eyebrow spacing + bullets columna fija + h1 aire) ===== */
+
+/* 1) Eyebrow más separado del H1 */
+@media (max-width:430px){
+  #hero p.text-accent-green{
+    margin-bottom: .65rem; /* + espacio vs patch previo */
+  }
+}
+
+/* 2) H1: un pelín más de aire entre líneas */
+@media (max-width:430px){
+  #hero h1{
+    line-height: 1.14; /* antes ~1.10–1.12 */
+  }
+}
+
+/* 3) Bullets: misma columna (ícono 24px), textos alineados a la misma X */
+@media (max-width:430px){
+  /* bloque bullets con el mismo ancho que el resto del copy */
+  #hero .grid > :first-child{ --colw: min(336px, 90vw); }
+  #hero .grid > :first-child > ul{
+    max-width: var(--colw);
+    margin: 1.1rem auto 0;
+    text-align: left;
+  }
+
+  /* forzamos grid (gana a .flex de Tailwind) */
+  #hero ul li{
+    display: grid !important;
+    grid-template-columns: 24px 1fr; /* columna fija para los 3 íconos */
+    column-gap: 10px;
+    align-items: start;
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+}
+
+/* el contenedor del ícono no aporta márgenes que desplacen el texto */
+#hero ul li > span:first-child{
+  width: 24px !important;
+  height: 24px !important;
+  flex: 0 0 24px !important;
+  margin: 0 !important;          /* quita mt-1/mt-2 heredados */
+  padding: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* el texto del bullet no empuja hacia abajo/arriba */
+#hero ul li > span:last-child{
+  margin: 0 !important;
+  padding: 0 !important;
+  color: rgba(230,231,235,.86);
+  text-indent: 0;
+}
