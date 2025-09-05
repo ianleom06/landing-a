@@ -202,3 +202,95 @@ body{
   #hero .stacked{ max-width:340px; }
   #hero .stacked form{ padding:16px; margin-inline:14px; }
 }
+/* ===== HERO — PATCH #01 (según fotos 390×844) ===== */
+
+/* 1) Eyebrow + H1: tamaño menor y centrados */
+@media (max-width: 430px){
+  #hero .grid > :first-child{ text-align: center; } /* centrar sólo en mobile */
+
+  #hero p.text-accent-green{
+    font-size: 0.88rem;         /* más chico */
+    letter-spacing: .20em;
+    margin-bottom: .55rem;
+  }
+
+  #hero h1{
+    font-weight: 800;
+    font-size: clamp(1.9rem, 7.3vw, 2.35rem); /* bajamos un notch */
+    line-height: 1.06;
+    letter-spacing: -0.5px;
+    max-width: 20ch;
+    margin-inline: auto; /* centra el bloque del H1 */
+  }
+}
+
+/* 2) Subrayado: más grueso + animado left→right al cargar */
+#hero .u-underline{ position: relative; box-shadow: none; }
+#hero .u-underline::after{
+  content:"";
+  position:absolute; left:-6px; right:-16px; bottom:-10px;
+  height:10px; background:var(--g); border-radius:6px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: heroBarDraw .9s ease-out .15s forwards;
+  will-change: transform;
+}
+@keyframes heroBarDraw{
+  0%{ transform: scaleX(0); opacity:.7; }
+  100%{ transform: scaleX(1); opacity:1; }
+}
+/* Respeto accesibilidad */
+@media (prefers-reduced-motion: reduce){
+  #hero .u-underline::after{ animation: none; transform: none; }
+}
+
+/* 3) Bullets: texto más chico y gris, íconos SIN fondo */
+@media (max-width: 430px){
+  #hero ul{ margin-top: .9rem; }
+  #hero ul li{
+    gap: .65rem;
+    font-size: 1rem;                      /* un poquito más chico */
+  }
+}
+#hero ul li span:last-child{ color: rgba(230,231,235,.86); } /* gris suave */
+
+/* Ícono puro (sin cuadrado de fondo) */
+#hero ul li > span:first-child{
+  width: 24px; height: 24px; flex: 0 0 24px;
+  position: relative; display: inline-block;
+  background: transparent; box-shadow: none; border-radius: 0;
+}
+#hero ul li > span:first-child::before{
+  content:""; position:absolute; inset:0;
+  background: var(--g);                   /* sólo el ícono en verde */
+  -webkit-mask:center/contain no-repeat;  /* usamos la misma máscara */
+          mask:center/contain no-repeat;
+}
+/* users */
+#hero ul li:nth-child(1) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+}
+/* star */
+#hero ul li:nth-child(2) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+}
+/* price-tag */
+#hero ul li:nth-child(3) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+}
+
+/* 4) CTAs: centrados, más chicos y “Contáctanos” en blanco */
+#hero .mt-8{ display:flex; justify-content:center; gap:12px; }
+#hero a[href="#contacto"], #hero a[href="#precios"]{
+  border-radius:14px;
+  padding: 14px 18px;       /* más chicos */
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+#hero a[href="#contacto"]{
+  color:#ffffff;            /* texto blanco como pediste */
+  background: var(--g);
+}
