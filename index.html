@@ -9,6 +9,31 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+  // Config Tailwind para tokens personalizados
+  window.tailwind = {
+    config: {
+      theme: {
+        fontFamily: { 
+          sans: ['Inter','system-ui','Segoe UI','Roboto','Helvetica Neue','Arial','Noto Sans','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'] 
+        },
+        extend: {
+          colors: {
+            base: { 900:'#0b0e12', 800:'#101418', 700:'#141922', 600:'#1b2230' },
+            text: { DEFAULT:'#e6e7eb', soft:'#b9c0cc' },
+            accent: { green:'#24D082', teal:'#1ED6BE', blue:'#30A8F7' }
+          },
+          boxShadow: {
+            elev: '0 10px 30px rgba(0,0,0,.35)',
+            glow: '0 0 0 2px rgba(36,208,130,.18), 0 35px 60px -15px rgba(36,208,130,.45)',
+          },
+          borderRadius: { xl2: '1rem' }
+        }
+      }
+    }
+  }
+</script>
+<!-- Luego va tu <script src="https://cdn.tailwindcss.com"></script> -->
 
   <!-- Tailwind (tu CDN actual) -->
   <script src="https://cdn.tailwindcss.com"></script>
