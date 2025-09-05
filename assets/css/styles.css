@@ -384,3 +384,89 @@ body{
   font-size:1rem;
   border-radius:12px;
 }
+/* ===== HERO — PATCH #03 (390×844 fine-tune) ===== */
+
+/* 1) Título un poco más chico (match con la ref) */
+@media (max-width:430px){
+  #hero h1{
+    font-size: clamp(1.62rem, 6.0vw, 2.00rem); /* -~0.15rem vs patch #02 */
+    line-height: 1.06;
+    letter-spacing: -0.45px;
+    max-width: 20ch;
+  }
+}
+
+/* 2) Subrayado: dos trazos finos, uno L→R y el otro R→L */
+#hero .u-underline{ position:relative; box-shadow:none; }
+#hero .u-underline::before,
+#hero .u-underline::after{
+  content:""; position:absolute; border-radius:999px; height:5px;
+  background: var(--g);
+  transform: scaleX(0);
+  will-change: transform;
+}
+/* Trazo 1: aparece desde la IZQUIERDA */
+#hero .u-underline::before{
+  left:-10px; right:-22px; bottom:-9px;
+  transform-origin: left center;
+  transform: scaleX(0) rotate(.7deg);
+  animation: heroBarLeft .65s ease-out .10s forwards;
+}
+/* Trazo 2: aparece desde la DERECHA */
+#hero .u-underline::after{
+  left:-6px; right:-24px; bottom:-13px;
+  transform-origin: right center;
+  transform: scaleX(0) rotate(-.6deg);
+  animation: heroBarRight .65s ease-out .18s forwards;
+}
+@keyframes heroBarLeft  { to{ transform: scaleX(1) rotate(.7deg);  } }
+@keyframes heroBarRight { to{ transform: scaleX(1) rotate(-.6deg); } }
+@media (prefers-reduced-motion: reduce){
+  #hero .u-underline::before, #hero .u-underline::after{ animation:none; transform:none; }
+}
+
+/* 3) Bullets: mismo margen visual, iconos + grandes y pegados, texto top-aligned */
+@media (max-width:430px){
+  /* forzamos mismo ancho del bloque de copy para eyebrow, h1 y bullets */
+  #hero .grid > :first-child{ --colw: min(336px, 90vw); }
+  #hero .grid > :first-child > *{ max-width: var(--colw); margin-inline:auto; }
+
+  #hero ul{ margin-top: 1.0rem; text-align:left; }
+  #hero ul li{
+    align-items: flex-start;           /* alinea el texto con el top del icono */
+    gap: 8px;                          /* icono “pegado” */
+    font-size: .98rem;                 /* un toque más chico */
+    line-height: 1.55;
+  }
+}
+/* tono gris suave del texto */
+#hero ul li span:last-child{ color: rgba(230,231,235,.84); margin-top:2px; }
+
+/* Icono puro (sin fondo), más grande */
+#hero ul li > span:first-child{
+  position: relative;
+  width: 30px; height: 30px; flex: 0 0 30px;
+  margin-top: 2px;                     /* compensa altura del trazo */
+  background: transparent; box-shadow: none; border-radius: 0;
+}
+#hero ul li > span:first-child::before{
+  content:""; position:absolute; inset:0;
+  background: var(--g);
+  -webkit-mask: center/contain no-repeat;
+          mask: center/contain no-repeat;
+}
+/* users */
+#hero ul li:nth-child(1) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+}
+/* star */
+#hero ul li:nth-child(2) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+}
+/* tag */
+#hero ul li:nth-child(3) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+}
