@@ -282,3 +282,78 @@ body{
   -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
           mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
 }
+/* ===== HERO — PATCH #04 (alineado bullets + spacing H1 + CTA verde) ===== */
+
+/* 1) Eyebrow más cerca del H1 (lo “subimos” un poco) */
+@media (max-width:430px){
+  #hero p.text-accent-green{
+    margin-bottom: .35rem; /* antes > .5rem */
+  }
+}
+
+/* 2) H1: separar un poco las dos líneas */
+@media (max-width:430px){
+  #hero h1{
+    line-height: 1.12; /* antes ~1.06–1.08 */
+  }
+}
+
+/* 3) Bullets: misma columna para TODOS (icono y texto), sin “bailar” el primero */
+@media (max-width:430px){
+  #hero .grid > :first-child{ --colw: min(336px, 90vw); }
+  #hero .grid > :first-child > ul{
+    max-width: var(--colw);
+    margin: 1.15rem auto 0; /* un pelín más de aire bajo el subrayado */
+    text-align: left;
+  }
+  /* cada li en grid: [icono fijo | texto], así todas las líneas arrancan igual */
+  #hero ul li{
+    display: grid;
+    grid-template-columns: 32px 1fr; /* icono + texto */
+    column-gap: 8px;                 /* pegado al icono */
+    align-items: start;
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+}
+
+/* texto gris suave y sin desplazamiento vertical extra */
+#hero ul li span:last-child{
+  color: rgba(230,231,235,.86);
+  margin-top: 0;
+}
+
+/* Icono puro (sin fondo), un poco más grande */
+#hero ul li > span:first-child{
+  position: relative;
+  width: 32px; height: 32px; flex: 0 0 32px;
+  margin-top: 2px;            /* alinear con la primera línea del texto */
+  background: transparent; box-shadow: none; border-radius: 0;
+}
+#hero ul li > span:first-child::before{
+  content: ""; position: absolute; inset: 0;
+  background: var(--g);
+  -webkit-mask: center/contain no-repeat;
+          mask: center/contain no-repeat;
+}
+/* users */
+#hero ul li:nth-child(1) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+}
+/* star */
+#hero ul li:nth-child(2) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+}
+/* tag */
+#hero ul li:nth-child(3) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+}
+
+/* 4) CTA secundario: texto en verde */
+#hero a[href="#precios"]{
+  color: var(--g) !important; /* forzamos el verde como pediste */
+  border-color: var(--g);
+}
