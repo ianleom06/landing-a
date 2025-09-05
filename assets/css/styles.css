@@ -1,327 +1,143 @@
-/* ============ TOKENS (mobile-first) ============ */
+/* =========================
+   TOKENS (mobile-first)
+   ========================= */
 :root{
   color-scheme: dark;
-  --bg-900:#111418;            /* un poco más gris */
-  --bg-800:#161a1f;
+  --bg-900:#0f1216;
+  --bg-800:#101519;
   --text:#e6e7eb;
   --text-soft:#b9c0cc;
-  --g:#24D082;                 /* accent green */
-  --teal:#1ED6BE;
-  --blue:#30A8F7;
+  --g:#24D082;      /* accent green */
+  --teal:#1ED6BE;   /* capa superior detrás del form */
+  --blue:#30A8F7;   /* capa inferior detrás del form */
 
   --r:16px;
   --shadow-elev:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* ============ BASE ============ */
+/* =========================
+   BASE
+   ========================= */
 html,body{ background:#101519; }
 body{
   color:var(--text);
-  /* halos suaves de fondo */
+  /* halos suaves de fondo para dar profundidad global */
   background-image:
     radial-gradient(1200px 600px at 10% -10%, rgba(48,168,247,.05), transparent 70%),
     radial-gradient(1000px 600px at 90% 10%, rgba(36,208,130,.05), transparent 70%);
 }
 :focus-visible{ outline:2px solid var(--blue); outline-offset:2px; }
 
-/* Subrayado bonito para “100% personalizada” */
+/* Subrayados generales elegantes (fallback global) */
 .u-underline{
   box-shadow: inset 0 -.32em 0 rgba(36,208,130,.90);
   padding-bottom:.02em;
 }
 
-/* ============ HERO (patrón de rayas + stacking fijo) ============ */
-#hero{ position:relative; overflow:hidden; background:transparent; }
+/* =========================================================
+   HERO — PIXEL MATCH (MOBILE-FIRST 390×844) — CLON VISUAL
+   ========================================================= */
+#hero{
+  position:relative;
+  overflow:hidden;
+  background:var(--bg-800);
+  color:var(--text);
+}
+
+/* Patrón de rayas diagonales (suave) */
 #hero::before{
-  content:""; position:absolute; inset:0; z-index:0;
-  background:repeating-linear-gradient(150deg,
-     rgba(255,255,255,.05), rgba(255,255,255,.05) 2px,
-     transparent 2px, transparent 22px);
-  opacity:.28; pointer-events:none;
-}
-#hero > *{ position:relative; z-index:1; } /* todo por encima del patrón */
-
-/* ===== MOBILE (clonado de tus screenshots) ===== */
-@media (max-width:480px){
-  /* respiración del bloque para que el form quede más abajo */
-  #hero > .mx-auto{ padding-top:2.2rem; padding-bottom:2.6rem; }
-
-  /* copy centrada */
-  #hero .grid > :first-child{ text-align:center; }
-
-  /* H1 grande y compacto */
-  #hero h1{
-    font-weight:800;
-    line-height:1.15;
-    letter-spacing:-.2px;
-    font-size:clamp(2.05rem, 6.6vw + .9rem, 2.60rem);
-    margin-top:.35rem;
-  }
-
-  /* bullets */
-  #hero ul{ margin:1rem auto 0; max-width:34ch; }
-  #hero ul li{ font-size:1rem; line-height:1.5; margin:.5rem 0; }
-  #hero ul li > span:first-child{
-    background:rgba(36,208,130,.12); color:var(--g);
-    border-radius:999px;
-  }
-
-  /* CTAs centrados y “gorditos” */
-  #hero .mt-8.flex{ justify-content:center; gap:.9rem; }
-  #hero .mt-8.flex a{ padding:14px 22px; border-radius:12px; font-weight:700; }
-
-  /* empujar un poco el contenedor del form respecto del copy */
-  #hero .grid > :last-child{ margin-top:1.1rem; }
-}
-
-/* Botón primario (sólido) y secundario (outline) */
-#hero a[href="#contacto"]{
-  background:var(--g); color:#061017; border:0;
-  border-radius:12px; padding:14px 20px; font-weight:700;
-  box-shadow:0 12px 30px rgba(36,208,130,.35);
-  transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
-}
-#hero a[href="#contacto"]:hover{ filter:brightness(1.05); transform:translateY(-1px); }
-#hero a[href="#precios"]{
-  background:transparent; color:#d9e1ee;
-  border:1.5px solid rgba(255,255,255,.22);
-  border-radius:12px; padding:14px 20px; font-weight:600;
-}
-
-/* ============ FORM “STACKED” (capas visibles) ============ */
-/* Contenedor con capas de color detrás (no tapan el form) */
-#hero .stacked{ position:relative; isolation:isolate; max-width:520px; margin:0 auto; }
-#hero .stacked::before,
-#hero .stacked::after{
-  content:""; position:absolute; z-index:0; border-radius:22px; pointer-events:none;
-  /* ancladas arriba-derecha y sobresaliendo a la derecha/abajo */
-  top:12px; right:-10px; left:auto; bottom:-12px;
-  width:calc(100% - 14px); height:calc(100% - 14px);
-  box-shadow:0 10px 24px rgba(0,0,0,.25);
-}
-#hero .stacked::before{ background:#1ED6BE; transform:translate(2px,2px);  opacity:.96; }
-#hero .stacked::after { background:#30A8F7; transform:translate(16px,16px); opacity:.96; }
-
-/* Panel del formulario siempre encima */
-#hero .stacked form{
-  position:relative; z-index:1;
-  background:#fff; color:#0e1217;
-  border-radius:18px; padding:18px 20px;
-  box-shadow:var(--shadow-elev);
-}
-/* inputs claros */
-#hero .stacked form :is(input,textarea,select){
-  background:#f8fafc; color:#0f141a;
-  border:1.5px solid #e1e6ef; border-radius:12px;
-  padding:14px 16px; box-shadow:inset 0 1px 2px rgba(0,0,0,.05);
-}
-#hero .stacked form ::placeholder{ color:#7e8aa1; }
-#hero .stacked form :is(input,textarea,select):focus{
-  outline:2px solid var(--g); outline-offset:2px; border-color:var(--g);
-}
-/* botón del form */
-#hero .stacked form button{
-  background:var(--g); color:#061017; border:0;
-  border-radius:12px; padding:14px 20px; font-weight:700;
-  box-shadow:0 12px 30px rgba(36,208,130,.35);
-}
-/* compacto en móviles pequeños */
-@media (max-width:480px){
-  #hero .stacked{ max-width:340px; }
-  #hero .stacked form{ padding:16px; }
-}
-
-/* ============ TABLET / DESKTOP (no rompe mobile-first) ============ */
-@media (min-width:768px){
-  #hero .grid > :first-child{ text-align:left; }
-  #hero .mt-8.flex{ justify-content:flex-start; }
-  #hero h1{ font-size: clamp(2.2rem, 1.7rem + 1.8vw, 3.2rem); }
-}
-/* ==== HERO — ajuste fino para que quede como las capturas (MOBILE FIRST) ==== */
-
-/* Fondo del hero un poco más claro y rayas más visibles */
-#hero{ background:#111519; }
-#hero::before{
-  opacity:.28;
-  background:repeating-linear-gradient(160deg,
-    rgba(255,255,255,.055) 0 2px, transparent 2px 18px);
-}
-
-/* Tipografía y layout del bloque izquierdo */
-@media (max-width:430px){
-  #hero .grid{ align-items:flex-start !important; }
-  #hero .grid > :first-child{ text-align:left; margin-top: 4.5vh !important; }
-  #hero p.text-accent-green{
-    letter-spacing:.18em; font-weight:700; margin-bottom:.75rem !important;
-  }
-  #hero h1{
-    font-size:clamp(2.15rem, 8.2vw, 2.7rem) !important;
-    line-height:1.05 !important; letter-spacing:-.6px !important;
-  }
-}
-
-/* Subrayado tipo “barra pintada” bajo el span .u-underline */
-#hero .u-underline{ position:relative; box-shadow:none !important; }
-#hero .u-underline::after{
-  content:""; position:absolute; left:-4px; right:-14px; bottom:-10px;
-  height:8px; background:#24D082; border-radius:4px;
-}
-
-/* Bullets: icono verde + texto más grande y aireado */
-#hero ul{ margin-top:1.1rem !important; }
-#hero ul li{ gap:.75rem !important; font-size:1.08rem !important; line-height:1.55 !important; }
-#hero ul li > span:first-child{
-  width:28px; height:28px; border-radius:8px;
-  display:inline-grid; place-items:center;
-  background:radial-gradient(40% 40% at 50% 30%, rgba(36,208,130,.95), rgba(36,208,130,.75));
-  color:#07150f !important; box-shadow:0 4px 14px rgba(36,208,130,.28);
-}
-
-/* CTAs grandes y con glow */
-#hero .mt-8{ gap:14px !important; margin-top:20px !important; }
-#hero a[href="#contacto"], #hero a[href="#precios"]{
-  border-radius:16px !important; padding:16px 22px !important; font-size:1.06rem !important;
-}
-#hero a[href="#contacto"]{
-  background:#24D082 !important; color:#061015 !important; border:0 !important;
-  box-shadow:0 30px 60px -25px rgba(36,208,130,.55), 0 8px 20px -10px rgba(36,208,130,.35) !important;
-}
-#hero a[href="#precios"]{
-  background:transparent !important; color:#dfe9f3 !important;
-  border:1.8px solid #24D082 !important;
-}
-
-/* Empujamos el form un poco más abajo (como tu referencia) */
-@media (max-width:430px){
-  #hero .relative > .stacked{ margin-top:min(6vh,32px) !important; }
-}
-
-/* ====== FORM “STACKED” con dos capas (teal/blue) ====== */
-#hero .stacked{ position:relative; isolation:isolate; }
-#hero .stacked::before, #hero .stacked::after{
-  content:""; position:absolute; border-radius:26px; z-index:0;
-}
-/* Teal (arriba) */
-#hero .stacked::before{
-  left:22px; right:68px; top:22px; bottom:-22px;
-  background:#1ED6BE;
-}
-/* Blue (abajo, más a la derecha) */
-#hero .stacked::after{
-  left:54px; right:-4px; top:30px; bottom:-16px;
-  background:#30A8F7;
-}
-/* Panel blanco encima */
-#hero .stacked form{
-  position:relative; z-index:1;
-  border-radius:26px !important; background:#ffffff !important; color:#0e1217 !important;
-  padding:20px !important; box-shadow:0 14px 40px rgba(0,0,0,.35);
-}
-@media (max-width:430px){
-  #hero .stacked form{ margin-inline:14px; }
-}
-
-/* Inputs claros grandes */
-#hero form input, #hero form textarea{
-  background:#EEF3F7 !important; border:1px solid #E1E8F0 !important;
-  border-radius:14px !important; padding:14px 16px !important; font-size:1rem;
-}
-#hero form ::placeholder{ color:#7e8aa1 !important; }
-#hero form :is(input,textarea,select):focus{
-  outline:2px solid #24D082 !important; outline-offset:2px !important; border-color:#24D082 !important;
-}
-/* ================= HERO — CLON VISUAL (mobile-first) ================= */
-
-/* tokens reutilizados */
-:root{
-  --bg-900:#0f1216;
-  --bg-800:#101519;
-  --g:#24D082;
-  --teal:#1ED6BE;
-  --blue:#30A8F7;
-}
-
-/* Hero: patrón + curva inferior */
-#hero{ position:relative; overflow:hidden; background:var(--bg-800); }
-#hero::before{
-  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-  /* rayas más separadas y suaves */
+  content:"";
+  position:absolute; inset:0; z-index:0; pointer-events:none;
   background:
     repeating-linear-gradient(160deg,
       rgba(255,255,255,.045) 0 3px,
       transparent 3px 28px);
   opacity:.28;
-  /* fade sutil arriba/abajo para que “se corten” bonito */
+  /* recorte superior/inferior sutil */
   -webkit-mask: linear-gradient(to bottom, transparent 0 16px, #000 16px calc(100% - 16px), transparent calc(100% - 16px));
           mask: linear-gradient(to bottom, transparent 0 16px, #000 16px calc(100% - 16px), transparent calc(100% - 16px));
 }
+
+/* Curva inferior (fade hacia el siguiente bloque oscuro) */
 #hero::after{
-  /* curva bonita como en la referencia */
-  content:""; position:absolute; left:0; right:0; bottom:-1px; height:180px; z-index:0;
-  background:
-    radial-gradient(130% 100% at 50% -10%,
-      transparent 60%, var(--bg-900) 61%);
+  content:"";
+  position:absolute; left:0; right:0; bottom:-1px; height:180px; z-index:0;
+  background:radial-gradient(130% 100% at 50% -10%, transparent 60%, var(--bg-900) 61%);
 }
 
-/* El contenido del hero por encima de fondo y curva */
+/* Todo el contenido del hero por encima de patrón/curva */
 #hero > *{ position:relative; z-index:1; }
 
-/* COPY IZQUIERDO — tamaños y espaciado */
+/* ---------- Eyebrow / H1 / layout (MOBILE FIRST) ---------- */
 @media (max-width:430px){
-  #hero .grid > :first-child{ text-align:left; }
-  #hero p.text-accent-green{ letter-spacing:.18em; font-weight:700; margin-bottom:.75rem; }
+  /* padding vertical para que el form “respire” */
+  #hero > .mx-auto{ padding-top:2.1rem; padding-bottom:2.6rem; }
+
+  /* copy alineada a la izquierda como en la referencia */
+  #hero .grid{ align-items:flex-start; }
+  #hero .grid > :first-child{ text-align:left; margin-top:4.5vh; }
+
+  /* eyebrow “HECHO EN URUGUAY” */
+  #hero p.text-accent-green{
+    letter-spacing:.18em; font-weight:700; text-transform:uppercase;
+    margin-bottom:.75rem;
+  }
+
+  /* H1 grande y compacto con tracking negativo */
   #hero h1{
-    font-size:clamp(2.05rem, 7.2vw, 2.70rem);
-    line-height:1.05; letter-spacing:-.6px; margin-top:.15rem;
+    font-weight:800;
+    font-size:clamp(2.15rem, 8.2vw, 2.7rem);
+    line-height:1.05;
+    letter-spacing:-.6px;
+    margin-top:.15rem;
     max-width:22ch;
   }
-  /* algo de respiro para que el form quede más abajo */
-  #hero > .mx-auto{ padding-top:2.1rem; padding-bottom:2.6rem; }
 }
 
-/* Subrayado verde “pintado” que aparece con animación */
-#hero .u-underline{ position:relative; box-shadow:none !important; }
+/* Subrayado “barra pintada” solo para el span marcado */
+#hero .u-underline{ position:relative; box-shadow:none; }
 #hero .u-underline::after{
-  content:""; position:absolute; left:-6px; right:-18px; bottom:-10px; height:8px;
-  background:#24D082; border-radius:4px; transform-origin:left center; transform:scaleX(.0);
-  animation:underline-in .7s cubic-bezier(.2,.7,.2,1) .2s forwards;
+  content:"";
+  position:absolute; left:-4px; right:-14px; bottom:-10px;
+  height:8px; background:var(--g); border-radius:4px;
 }
-@keyframes underline-in{ to{ transform:scaleX(1);} }
 
-/* Bullets: iconos idénticos, pegados al texto */
+/* ---------- Bullets con íconos (people, star, tag) ---------- */
 #hero ul{ margin-top:1.1rem; }
-#hero ul li{ display:flex; align-items:flex-start; gap:.75rem; font-size:1.08rem; line-height:1.55; }
+#hero ul li{
+  display:flex; align-items:flex-start; gap:.75rem;
+  font-size:1.08rem; line-height:1.55;
+}
 #hero ul li > span:first-child{
-  width:28px; height:28px; border-radius:8px; flex:0 0 28px;
-  display:inline-grid; place-items:center;
+  width:28px; height:28px; flex:0 0 28px; border-radius:8px;
+  display:inline-grid; place-items:center; overflow:hidden; position:relative;
   background:radial-gradient(42% 42% at 50% 30%, rgba(36,208,130,.95), rgba(36,208,130,.75));
   box-shadow:0 6px 18px rgba(36,208,130,.28);
-  color:#06150f; /* fallback si no carga la máscara */
-  position:relative; overflow:hidden;
+  color:transparent; /* oculta cualquier caracter dentro del span */
 }
-/* Iconos por máscara SVG (users, star, price-tag) */
+/* Iconos por máscara SVG (máxima similitud con la referencia) */
 #hero ul li > span:first-child::before{
   content:""; position:absolute; inset:0; margin:auto; width:64%; height:64%;
   background:#06150f;
   -webkit-mask:center/contain no-repeat; mask:center/contain no-repeat;
 }
+/* users */
 #hero ul li:nth-child(1) > span:first-child::before{
-  /* users */
   -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
           mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
 }
+/* star */
 #hero ul li:nth-child(2) > span:first-child::before{
-  /* star */
   -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
           mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
 }
+/* price-tag */
 #hero ul li:nth-child(3) > span:first-child::before{
-  /* price-tag */
   -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
           mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
 }
 
-/* CTAs (idénticos: primario sólido + outline) */
+/* ---------- CTAs (primario sólido + outline) ---------- */
 #hero .mt-8{ gap:14px; margin-top:20px; }
 #hero a[href="#contacto"], #hero a[href="#precios"]{
   border-radius:16px; padding:16px 22px; font-size:1.06rem; font-weight:700;
@@ -335,43 +151,54 @@ body{
   border:1.8px solid var(--g);
 }
 
-/* FORM STACK — panel y dos “capas” de color detrás */
-#hero .stacked{ position:relative; isolation:isolate; max-width:540px; margin-inline:auto; }
-#hero .stacked::before,
-#hero .stacked::after{
-  content:""; position:absolute; z-index:0; border-radius:22px; pointer-events:none;
+/* ---------- FORM STACK (panel + 2 capas teal/blue detrás) ---------- */
+#hero .stacked{
+  position:relative; isolation:isolate; max-width:540px; margin-inline:auto;
+}
+#hero .stacked::before, #hero .stacked::after{
+  content:""; position:absolute; z-index:0; border-radius:26px; pointer-events:none;
   right:-14px; left:auto;
 }
-#hero .stacked::before{ /* teal (arriba) */
-  top:14px; bottom:-10px; background:#1ED6BE;
-}
-#hero .stacked::after{  /* blue (abajo) */
-  top:28px; bottom:-18px; background:#30A8F7;
-}
+/* Teal (arriba, más cerca del panel) */
+#hero .stacked::before{ top:14px; bottom:-10px; background:var(--teal); }
+/* Blue (abajo, corrido a la derecha) */
+#hero .stacked::after{  top:28px; bottom:-18px; background:var(--blue); }
+
+/* Panel blanco encima */
 #hero .stacked form{
-  position:relative; z-index:1; background:#fff; color:#0e1217;
-  border-radius:22px; padding:22px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+  position:relative; z-index:1;
+  border-radius:26px; background:#fff; color:#0e1217;
+  padding:20px; box-shadow:0 14px 40px rgba(0,0,0,.35);
 }
-#hero .stacked form :is(input,textarea,select){
-  background:#eef3f8; color:#0f141a; border:1.5px solid #e1e6ef; border-radius:14px;
-  padding:14px 16px; box-shadow:inset 0 1px 2px rgba(0,0,0,.05);
+
+/* Inputs claros grandes + focus accesible */
+#hero form input, #hero form textarea{
+  background:#EEF3F7; border:1px solid #E1E8F0;
+  border-radius:14px; padding:14px 16px; font-size:1rem;
 }
-#hero .stacked form ::placeholder{ color:#7e8aa1; }
-#hero .stacked form :is(input,textarea,select):focus{
+#hero form ::placeholder{ color:#7e8aa1; }
+#hero form :is(input,textarea,select):focus{
   outline:2px solid var(--g); outline-offset:2px; border-color:var(--g);
 }
+
+/* Botón del form */
 #hero .stacked form button{
-  background:var(--g); color:#061017; border:0; border-radius:14px; padding:16px 22px; font-weight:800;
+  background:var(--g); color:#061017; border:0;
+  border-radius:14px; padding:16px 22px; font-weight:800;
   box-shadow:0 24px 60px -25px rgba(36,208,130,.55), 0 8px 20px -10px rgba(36,208,130,.35);
 }
 
-/* Desktop: dejamos el form un poco más pequeño como la referencia */
-@media (min-width:1024px){
+/* ---------- Tablet/Desktop (no rompe mobile-first) ---------- */
+@media (min-width:768px){
+  #hero .grid > :first-child{ text-align:left; }
+  #hero .mt-8.flex{ justify-content:flex-start; }
+  #hero h1{ font-size:clamp(2.2rem, 1.7rem + 1.8vw, 3.2rem); }
   #hero .stacked{ max-width:520px; }
 }
 
-/* Móvil XS: form compacto y empujado hacia abajo tras el copy */
+/* ---------- Compacto en móviles pequeños ---------- */
 @media (max-width:430px){
-  #hero .stacked{ max-width:340px; margin-top:min(6vh,32px); }
-  #hero .stacked form{ padding:16px; border-radius:20px; }
+  #hero .relative > .stacked{ margin-top:min(6vh,32px); }
+  #hero .stacked{ max-width:340px; }
+  #hero .stacked form{ padding:16px; margin-inline:14px; }
 }
