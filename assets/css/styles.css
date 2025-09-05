@@ -137,3 +137,120 @@ body{
   #hero .mt-8.flex{ justify-content:flex-start; }
   #hero h1{ font-size: clamp(2.2rem, 1.7rem + 1.8vw, 3.2rem); }
 }
+/* ======== HERO — Ajuste 1: escala, alineación y subrayado ======== */
+@media (max-width:480px){
+  /* izquierda (como la ref), títulos menos gigantes y más respiro */
+  #hero .grid > :first-child{ text-align:left !important; }
+  #hero h1{
+    /* ~36–38px en iPhone 12/13, dos líneas cómodas */
+    font-size: clamp(1.85rem, 4.4vw + .7rem, 2.35rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -.2px !important;
+    margin-top:.35rem !important;
+  }
+  /* bullets más cerca del texto */
+  #hero ul{ margin-top: .75rem !important; }
+  #hero ul li{ gap:.6rem !important; font-size:1rem !important; line-height:1.55 !important; }
+  /* botones grandes y aireados, como la ref */
+  #hero .mt-8{ margin-top: 1.15rem !important; }
+  #hero .mt-8 > a{ font-size:1rem !important; padding:14px 22px !important; border-radius:14px !important; }
+  #hero .mt-8{ justify-content:flex-start !important; }
+}
+
+/* subrayado del “100% personalizada” – trazo más cercano y visible */
+#hero .u-underline{
+  box-shadow: inset 0 -.26em 0 rgba(36,208,130,.86) !important;
+  padding-bottom:.02em !important;
+}
+
+/* ======== HERO — Ajuste 2: fondo con rayas como la ref ======== */
+#hero{
+  position:relative; overflow:hidden; background:transparent !important;
+}
+#hero::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  /* rayas diagonales un poco más visibles */
+  background: repeating-linear-gradient(
+    165deg,
+    rgba(255,255,255,.06) 0 2px,
+    transparent 2px 22px
+  );
+  opacity:.22; z-index:0;
+}
+/* curva inferior un poco más alta para el remate */
+#hero::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:72px;
+  background:var(--bg-900); clip-path:ellipse(120% 72px at 50% 0%); z-index:0;
+}
+/* asegura que el contenido quede por encima del patrón/curva */
+#hero > *{ position:relative; z-index:1; }
+
+/* ======== HERO — Ajuste 3: iconos de la lista (users, star, tag) ======== */
+/* Usamos máscaras SVG embebidas; si no cargan, verás el símbolo ★ como fallback */
+#hero ul li span:first-child{
+  width:22px; height:22px; border-radius:6px;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:rgba(36,208,130,.12); color:var(--accent-green);
+  font-size:0; /* oculto el ★ */
+}
+#hero ul li span:first-child::before{
+  content:""; width:18px; height:18px; display:block; background:var(--accent-green);
+  -webkit-mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain;
+          mask-repeat:no-repeat;         mask-position:center;         mask-size:contain;
+}
+/* 1) users */
+#hero ul li:nth-child(1) span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16 13a4 4 0 10-8 0v1H7a5 5 0 00-5 5v1h20v-1a5 5 0 00-5-5h-1v-1zM12 12a3 3 0 100-6 3 3 0 000 6z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M16 13a4 4 0 10-8 0v1H7a5 5 0 00-5 5v1h20v-1a5 5 0 00-5-5h-1v-1zM12 12a3 3 0 100-6 3 3 0 000 6z'/></svg>");
+}
+/* 2) star */
+#hero ul li:nth-child(2) span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z'/></svg>");
+}
+/* 3) price-tag */
+#hero ul li:nth-child(3) span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M21 7.5V3h-4.5L3 16.5 7.5 21 21 7.5zM16 5a2 2 0 110 4 2 2 0 010-4z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M21 7.5V3h-4.5L3 16.5 7.5 21 21 7.5zM16 5a2 2 0 110 4 2 2 0 010-4z'/></svg>");
+}
+
+/* ======== FORM STACK — capas y tamaño como la 3ª captura ======== */
+#hero .stacked{ position:relative; isolation:isolate; }
+#hero .stacked::before,
+#hero .stacked::after{
+  content:""; position:absolute; z-index:0; border-radius:22px;
+  /* solo asoman por derecha e inferior */
+  top:22px; right:-16px; left:auto; bottom:-16px; width:calc(100% - 10px);
+}
+#hero .stacked::before{
+  background:#1ED6BE; transform:translate(4px, 2px); /* capa teal (superior) */
+}
+#hero .stacked::after{
+  background:#30A8F7; transform:translate(22px, 18px); /* capa blue (inferior) */
+}
+#hero .stacked form{
+  position:relative; z-index:1;
+  background:#fff !important; color:#0e1217 !important;
+  border-radius:22px !important; box-shadow:0 12px 34px rgba(0,0,0,.28) !important;
+}
+#hero .stacked form input,
+#hero .stacked form textarea{
+  background:#f2f6fb !important; border-color:#e3e9f3 !important;
+}
+
+/* En móvil el form queda compacto; los CTAs ocupan la vista y el form entra “debajo” */
+@media (max-width:480px){
+  #hero .stacked{ margin-top: 1.25rem !important; }
+  #hero .stacked form{ max-width: 352px !important; padding:18px 18px !important; }
+  #hero .stacked::before, #hero .stacked::after{ right:-14px; bottom:-14px; }
+}
+
+/* ======== CTAs — estilos como la ref (color y borde) ======== */
+#hero a[href="#contacto"]{
+  background:#24D082 !important; color:#061017 !important; border:0 !important;
+  box-shadow:0 18px 40px rgba(36,208,130,.35) !important;
+}
+#hero a[href="#precios"]{
+  background:transparent !important; color:#24D082 !important;
+  border:1.5px solid #24D082 !important;
+}
