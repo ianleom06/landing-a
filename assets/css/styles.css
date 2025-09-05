@@ -176,3 +176,109 @@ body{
   #hero .stacked{ max-width:340px; }
   #hero .stacked form{ padding:16px; margin-inline:14px; }
 }
+/* ================= HERO — CONSOLIDADO (ajuste de espaciados + bullets + subrayado) ================ */
+
+/* 0) Patrón/curva y tokens ya los tienes; este bloque solo retoca layout, H1, subrayado y bullets */
+
+/* 1) Layout: bajar el bloque de copy y unificar la “columna visual” */
+@media (max-width:430px){
+  /* empuja un poco todo el contenido del hero hacia abajo */
+  #hero > .mx-auto{ padding-top: 2.8rem; padding-bottom: 2.6rem; }
+
+  /* el primer hijo de la grid (texto) define un ancho común y se centra; H1 centrado, bullets a la izq. dentro de ese ancho */
+  #hero .grid > :first-child{
+    --colw: min(336px, 90vw);
+    margin-top: 6.0vh;                 /* baja el bloque del título */
+    text-align: center;
+  }
+  /* eyebrow, h1 y CTAs comparten el mismo ancho y centrado */
+  #hero .grid > :first-child > :is(p.text-accent-green, h1, .mt-8){
+    max-width: var(--colw);
+    margin-left:auto; margin-right:auto;
+  }
+  /* bullets usan el mismo ancho pero se alinean a la izquierda */
+  #hero .grid > :first-child > ul{
+    max-width: var(--colw);
+    margin: 1.05rem auto 0;
+    text-align: left;
+  }
+}
+
+/* 2) H1: un poquito más chico (match con la referencia) */
+@media (max-width:430px){
+  #hero h1{
+    font-weight:800;
+    font-size: clamp(1.58rem, 5.8vw, 1.98rem);  /* -~0.02–0.07rem vs tu estado anterior */
+    line-height: 1.06;
+    letter-spacing: -0.45px;
+    max-width: 20ch;
+  }
+}
+
+/* 3) Subrayado “bonito”: dos trazos finos; uno entra L→R y el otro R→L */
+#hero .u-underline{ position:relative; box-shadow:none; }
+#hero .u-underline::before,
+#hero .u-underline::after{
+  content:"";
+  position:absolute; height:5px; border-radius:999px; background:var(--g);
+  transform:scaleX(0); will-change:transform;
+}
+/* Trazo superior: desde la IZQUIERDA */
+#hero .u-underline::before{
+  left:-10px; right:-18px; bottom:-9px;
+  transform-origin:left center;
+  transform:scaleX(0) rotate(.6deg);
+  animation:heroBarInL .55s ease-out .10s forwards;
+}
+/* Trazo inferior: desde la DERECHA */
+#hero .u-underline::after{
+  left:-6px; right:-22px; bottom:-13px;
+  transform-origin:right center;
+  transform:scaleX(0) rotate(-.5deg);
+  animation:heroBarInR .55s ease-out .18s forwards;
+}
+@keyframes heroBarInL{ to{ transform:scaleX(1) rotate(.6deg); } }
+@keyframes heroBarInR{ to{ transform:scaleX(1) rotate(-.5deg); } }
+@media (prefers-reduced-motion: reduce){
+  #hero .u-underline::before, #hero .u-underline::after{ animation:none; transform:none; }
+}
+
+/* 4) Bullets: mismos márgenes, primer bullet alineado, iconos más grandes y texto pegado */
+@media (max-width:430px){
+  #hero ul{ margin-top: 1.05rem; }
+  #hero ul li{
+    display:flex; align-items:flex-start;
+    gap: 8px;                          /* texto más pegado al icono */
+    font-size: .98rem; line-height:1.55;
+  }
+}
+/* tono gris suave del texto */
+#hero ul li span:last-child{ color: rgba(230,231,235,.86); }
+
+/* icono puro (sin fondo), 30px y alinea con el texto de la primera línea */
+#hero ul li > span:first-child{
+  position:relative;
+  width:30px; height:30px; flex:0 0 30px;
+  margin-top: 2px;                     /* compensa la altura de la primera línea */
+  background:transparent; box-shadow:none; border-radius:0;
+}
+#hero ul li > span:first-child::before{
+  content:""; position:absolute; inset:0;
+  background:var(--g);
+  -webkit-mask:center/contain no-repeat; mask:center/contain no-repeat;
+}
+/* users */
+#hero ul li:nth-child(1) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+}
+/* star */
+#hero ul li:nth-child(2) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+}
+/* tag */
+#hero ul li:nth-child(3) > span:first-child::before{
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+}
