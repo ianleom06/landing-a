@@ -230,3 +230,148 @@ body{
 #hero form :is(input,textarea,select):focus{
   outline:2px solid #24D082 !important; outline-offset:2px !important; border-color:#24D082 !important;
 }
+/* ================= HERO — CLON VISUAL (mobile-first) ================= */
+
+/* tokens reutilizados */
+:root{
+  --bg-900:#0f1216;
+  --bg-800:#101519;
+  --g:#24D082;
+  --teal:#1ED6BE;
+  --blue:#30A8F7;
+}
+
+/* Hero: patrón + curva inferior */
+#hero{ position:relative; overflow:hidden; background:var(--bg-800); }
+#hero::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  /* rayas más separadas y suaves */
+  background:
+    repeating-linear-gradient(160deg,
+      rgba(255,255,255,.045) 0 3px,
+      transparent 3px 28px);
+  opacity:.28;
+  /* fade sutil arriba/abajo para que “se corten” bonito */
+  -webkit-mask: linear-gradient(to bottom, transparent 0 16px, #000 16px calc(100% - 16px), transparent calc(100% - 16px));
+          mask: linear-gradient(to bottom, transparent 0 16px, #000 16px calc(100% - 16px), transparent calc(100% - 16px));
+}
+#hero::after{
+  /* curva bonita como en la referencia */
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:180px; z-index:0;
+  background:
+    radial-gradient(130% 100% at 50% -10%,
+      transparent 60%, var(--bg-900) 61%);
+}
+
+/* El contenido del hero por encima de fondo y curva */
+#hero > *{ position:relative; z-index:1; }
+
+/* COPY IZQUIERDO — tamaños y espaciado */
+@media (max-width:430px){
+  #hero .grid > :first-child{ text-align:left; }
+  #hero p.text-accent-green{ letter-spacing:.18em; font-weight:700; margin-bottom:.75rem; }
+  #hero h1{
+    font-size:clamp(2.05rem, 7.2vw, 2.70rem);
+    line-height:1.05; letter-spacing:-.6px; margin-top:.15rem;
+    max-width:22ch;
+  }
+  /* algo de respiro para que el form quede más abajo */
+  #hero > .mx-auto{ padding-top:2.1rem; padding-bottom:2.6rem; }
+}
+
+/* Subrayado verde “pintado” que aparece con animación */
+#hero .u-underline{ position:relative; box-shadow:none !important; }
+#hero .u-underline::after{
+  content:""; position:absolute; left:-6px; right:-18px; bottom:-10px; height:8px;
+  background:#24D082; border-radius:4px; transform-origin:left center; transform:scaleX(.0);
+  animation:underline-in .7s cubic-bezier(.2,.7,.2,1) .2s forwards;
+}
+@keyframes underline-in{ to{ transform:scaleX(1);} }
+
+/* Bullets: iconos idénticos, pegados al texto */
+#hero ul{ margin-top:1.1rem; }
+#hero ul li{ display:flex; align-items:flex-start; gap:.75rem; font-size:1.08rem; line-height:1.55; }
+#hero ul li > span:first-child{
+  width:28px; height:28px; border-radius:8px; flex:0 0 28px;
+  display:inline-grid; place-items:center;
+  background:radial-gradient(42% 42% at 50% 30%, rgba(36,208,130,.95), rgba(36,208,130,.75));
+  box-shadow:0 6px 18px rgba(36,208,130,.28);
+  color:#06150f; /* fallback si no carga la máscara */
+  position:relative; overflow:hidden;
+}
+/* Iconos por máscara SVG (users, star, price-tag) */
+#hero ul li > span:first-child::before{
+  content:""; position:absolute; inset:0; margin:auto; width:64%; height:64%;
+  background:#06150f;
+  -webkit-mask:center/contain no-repeat; mask:center/contain no-repeat;
+}
+#hero ul li:nth-child(1) > span:first-child::before{
+  /* users */
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M16 11a3 3 0 100-6 3 3 0 000 6zM8 11a3 3 0 100-6 3 3 0 000 6zM2 19a6 6 0 016-6h8a6 6 0 016 6v1H2v-1z'/></svg>");
+}
+#hero ul li:nth-child(2) > span:first-child::before{
+  /* star */
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M12 2l2.84 6.26 6.86.53-5.17 4.49 1.6 6.72L12 17.77 5.87 20l1.6-6.72L2.3 8.79l6.86-.53L12 2z'/></svg>");
+}
+#hero ul li:nth-child(3) > span:first-child::before{
+  /* price-tag */
+  -webkit-mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+          mask-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'><path d='M21.41 11.58l-9-9A2 2 0 0011 2H4a2 2 0 00-2 2v7a2 2 0 00.59 1.42l9 9a2 2 0 002.83 0l7-7a2 2 0 000-2.84zM7.5 8A1.5 1.5 0 119 6.5 1.5 1.5 0 017.5 8z'/></svg>");
+}
+
+/* CTAs (idénticos: primario sólido + outline) */
+#hero .mt-8{ gap:14px; margin-top:20px; }
+#hero a[href="#contacto"], #hero a[href="#precios"]{
+  border-radius:16px; padding:16px 22px; font-size:1.06rem; font-weight:700;
+}
+#hero a[href="#contacto"]{
+  background:var(--g); color:#061015; border:0;
+  box-shadow:0 30px 60px -25px rgba(36,208,130,.55), 0 8px 20px -10px rgba(36,208,130,.35);
+}
+#hero a[href="#precios"]{
+  background:transparent; color:#e9f2fc;
+  border:1.8px solid var(--g);
+}
+
+/* FORM STACK — panel y dos “capas” de color detrás */
+#hero .stacked{ position:relative; isolation:isolate; max-width:540px; margin-inline:auto; }
+#hero .stacked::before,
+#hero .stacked::after{
+  content:""; position:absolute; z-index:0; border-radius:22px; pointer-events:none;
+  right:-14px; left:auto;
+}
+#hero .stacked::before{ /* teal (arriba) */
+  top:14px; bottom:-10px; background:#1ED6BE;
+}
+#hero .stacked::after{  /* blue (abajo) */
+  top:28px; bottom:-18px; background:#30A8F7;
+}
+#hero .stacked form{
+  position:relative; z-index:1; background:#fff; color:#0e1217;
+  border-radius:22px; padding:22px; box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+#hero .stacked form :is(input,textarea,select){
+  background:#eef3f8; color:#0f141a; border:1.5px solid #e1e6ef; border-radius:14px;
+  padding:14px 16px; box-shadow:inset 0 1px 2px rgba(0,0,0,.05);
+}
+#hero .stacked form ::placeholder{ color:#7e8aa1; }
+#hero .stacked form :is(input,textarea,select):focus{
+  outline:2px solid var(--g); outline-offset:2px; border-color:var(--g);
+}
+#hero .stacked form button{
+  background:var(--g); color:#061017; border:0; border-radius:14px; padding:16px 22px; font-weight:800;
+  box-shadow:0 24px 60px -25px rgba(36,208,130,.55), 0 8px 20px -10px rgba(36,208,130,.35);
+}
+
+/* Desktop: dejamos el form un poco más pequeño como la referencia */
+@media (min-width:1024px){
+  #hero .stacked{ max-width:520px; }
+}
+
+/* Móvil XS: form compacto y empujado hacia abajo tras el copy */
+@media (max-width:430px){
+  #hero .stacked{ max-width:340px; margin-top:min(6vh,32px); }
+  #hero .stacked form{ padding:16px; border-radius:20px; }
+}
