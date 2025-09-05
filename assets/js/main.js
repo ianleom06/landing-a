@@ -1,66 +1,63 @@
-// ===== MENU móvil + scroll con offset + accesibilidad =====
-(() => {
-  // Toggle menú móvil
-  const btn = document.getElementById('btnMenu');
-  const navMobile = document.getElementById('navMobile');
-
-  btn?.addEventListener('click', () => {
-    const open = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!open));
-    navMobile?.classList.toggle('hidden', open);
-  });
-
-  // Prefiere menos animaciones
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Calcula offset por header fijo
-  const header = document.querySelector('header');
-  const baseOffset = (header?.offsetHeight || 0) + 12; // +12px de aire
-
-  // Scroll con offset y foco accesible
-  function scrollToHash(hash, extra = 0) {
-    if (!hash || hash === '#') return;
-    const el = document.querySelector(hash);
-    if (!el) return;
-
-    const y = Math.max(
-      0,
-      el.getBoundingClientRect().top + window.pageYOffset - (baseOffset + extra)
-    );
-
-    window.scrollTo({ top: y, behavior: prefersReduced ? 'auto' : 'smooth' });
-
-    // Foco accesible (sin re-scroll)
-    el.setAttribute('tabindex', '-1');
-    el.focus({ preventScroll: true });
-  }
-
-  // Delegación para TODOS los <a href="#...">
-  document.addEventListener('click', (ev) => {
-    const a = ev.target.closest('a[href^="#"]');
-    if (!a) return;
-
-    const hash = a.getAttribute('href');
-    if (!hash || hash === '#') return;
-
-    ev.preventDefault();
-
-    // Si el link está en el menú móvil, lo cierro
-    if (navMobile && navMobile.contains(a)) {
-      navMobile.classList.add('hidden');
-      btn?.setAttribute('aria-expanded', 'false');
+// ==== Inline script block #2 from index_single.html ====
+/* Tailwind tokens (ajústalos a tu branding) */
+    tailwind.config = {
+      theme: {
+        fontFamily: { sans: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'] },
+        extend: {
+          colors: {
+            base: {
+              900: '#0b0e12',
+              800: '#101418',
+              700: '#141922',
+              600: '#1b2230'
+            },
+            text: {
+              DEFAULT: '#e6e7eb',
+              soft: '#b9c0cc',
+            },
+            accent: {
+              green: '#24D082',
+              teal: '#1ED6BE',
+              blue: '#30A8F7'
+            }
+          },
+          boxShadow: {
+            elev: '0 10px 30px rgba(0,0,0,.35)',
+            glow: '0 0 0 2px rgba(36,208,130,.18), 0 35px 60px -15px rgba(36,208,130,.45)',
+          },
+          borderRadius: {
+            xl2: '1rem',
+          }
+        }
+      }
     }
 
-    // Scroll con offset (sirve para "Ver Precios", etc.)
-    scrollToHash(hash);
-  });
 
-  // Si la página carga con hash (#precios, #contacto, etc.)
-  if (location.hash) {
-    requestAnimationFrame(() => scrollToHash(location.hash));
-  }
+// ==== Inline script block #3 from index_single.html ====
+// MENU mobile toggle
+    const btn = document.getElementById('btnMenu');
+    const nav = document.getElementById('navMobile');
+    btn?.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('hidden');
+    });
 
-  // Checks rápidos en consola
-  console.assert(document.querySelector('#hero') && document.querySelector('#precios'), 'Secciones clave presentes');
-  console.assert(getComputedStyle(document.body).backgroundImage.includes('repeating-linear-gradient'), 'Patrón de fondo activo');
-})();
+    // Smooth scroll fix for anchor focus
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.setAttribute('tabindex', '-1');
+          el.focus({ preventScroll: true });
+        }
+      });
+    });
+
+    // Pruebas rápidas (console.assert)
+    console.assert(document.querySelector('#hero') && document.querySelector('#precios'), 'Secciones clave presentes');
+    console.assert(window.getComputedStyle(document.body).backgroundImage.includes('radial-gradient'), 'Fondo decorativo activo');
